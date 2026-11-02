@@ -1,0 +1,8 @@
+{
+  "name": "Star Laundry & Dry Cleaners",
+  "description": "Star Laundry & Dry Cleaners (स्टार लाँड्री ॲन्ड ड्रायक्लिनers) in Hinjawadi, Pune. 3D washing physics, 2-3 hour express pickup & drop, and digital billing.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
