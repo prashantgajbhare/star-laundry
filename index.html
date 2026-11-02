@@ -1492,7 +1492,6 @@
     let localStarted = false;
     let reportedReady = false;
     let prevEruptF = 0;
-    let isPaused = false;
 
     const diffVec = new THREE.Vector3();
     const collideDiff = new THREE.Vector3();
@@ -1500,30 +1499,9 @@
     const deltaPos = new THREE.Vector3();
     const rotAxis = new THREE.Vector3();
 
-    // Check & automatically resume the physics/rendering loop when scrolling back in view
-    const checkResume = () => {
-      if (isPaused && control.progress <= 3.8) {
-        isPaused = false;
-        clock.getDelta(); // Reset clock delta so physics don't jump after resuming
-        animationFrameId = requestAnimationFrame(simulateAndRender);
-      }
-    };
-
-    window.addEventListener('scroll', checkResume, { passive: true });
-    window.addEventListener('wheel', checkResume, { passive: true });
-    window.addEventListener('touchmove', checkResume, { passive: true });
-
     const simulateAndRender = () => {
-      const progress = control?.progress ?? 0;
-
-      // Complete pause when out of view (e.g. progress > 3.8 in footer)
-      if (localStarted && progress > 3.8) {
-        isPaused = true;
-        // Do not request next frame; physics and WebGL rendering are completely halted
-        return;
-      }
-
       animationFrameId = requestAnimationFrame(simulateAndRender);
+      const progress = control?.progress ?? 0;
 
       const time = clock.getElapsedTime();
       clock.getDelta();
