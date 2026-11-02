@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="antialiased selection:bg-[#0E2AC5] selection:text-white">
+<html lang="en" class="antialiased selection:bg-[var(--theme-accent)] selection:text-white">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -26,7 +26,8 @@
             raleway: ['Raleway', 'Noto Sans Devanagari', 'sans-serif'],
           },
           colors: {
-            accent: '#0E2AC5',
+            accent: 'var(--theme-accent)',
+            'accent-light': 'var(--theme-accent-light)',
           }
         }
       }
@@ -48,6 +49,8 @@
       --font-display: "Space Grotesk", "Noto Sans Devanagari", sans-serif;
       --font-mono: "JetBrains Mono", monospace;
       --font-raleway: "Raleway", "Noto Sans Devanagari", sans-serif;
+      --theme-accent: #0E2AC5;
+      --theme-accent-light: #5175ff;
     }
 
     html, body {
@@ -426,11 +429,11 @@
       box-shadow: 0 14px 40px -12px rgba(14, 42, 197, 0.18);
     }
     .blue-orb {
-      background: radial-gradient(circle at 50% 30%, #5175ff 0%, #0e2ac5 55%, #020b40 100%);
+      background: radial-gradient(circle at 50% 30%, var(--theme-accent-light) 0%, var(--theme-accent) 55%, #020b40 100%);
     }
     .blue-dot-glow {
-      background: radial-gradient(circle at 35% 30%, #5175ff, #0e2ac5);
-      box-shadow: 0 0 8px rgba(47, 105, 255, 0.6);
+      background: radial-gradient(circle at 35% 30%, var(--theme-accent-light), var(--theme-accent));
+      box-shadow: 0 0 8px var(--theme-accent);
     }
     .signboard-marathi {
       color: #d82b63;
@@ -553,11 +556,11 @@
       Filling the washing drum
     </div>
     <div class="loader-item rounded-[99px] overflow-visible"
-         style="width: clamp(180px, 32vw, 280px); height: 2px; background: rgba(14, 42, 197, 0.14);">
+         style="width: clamp(180px, 32vw, 280px); height: 2px; background: color-mix(in srgb, var(--theme-accent) 15%, transparent);">
       <div id="loader-bar" class="h-full rounded-[99px]"
-           style="width: 0%; background: linear-gradient(90deg, #5175ff 0%, #0e2ac5 100%); box-shadow: 0 0 14px rgba(47, 105, 255, 0.55); transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);"></div>
+           style="width: 0%; background: linear-gradient(90deg, var(--theme-accent-light) 0%, var(--theme-accent) 100%); box-shadow: 0 0 14px var(--theme-accent); transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);"></div>
     </div>
-    <div id="loader-counter" class="loader-item font-mono text-[11px] tracking-[0.1em] text-[#0e2ac5] font-bold tabular-nums">
+    <div id="loader-counter" class="loader-item font-mono text-[11px] tracking-[0.1em] text-neutral-900 font-bold tabular-nums">
       000%
     </div>
   </div>
@@ -569,9 +572,9 @@
         <svg class="w-28 sm:w-32 h-11 sm:h-12 shrink-0" aria-label="Star Laundry Logo">
           <use href="#star-laundry-logo" />
         </svg>
-        <div class="hidden sm:flex flex-col border-l border-[#0E2AC5]/15 pl-2.5 leading-tight">
+        <div class="hidden sm:flex flex-col border-l border-[var(--theme-accent)]/20 pl-2.5 leading-tight">
           <span class="font-sans font-extrabold text-[13px] signboard-marathi">स्टार लाँड्री</span>
-          <span class="font-sans font-bold text-[10px] text-[#0e4da4]">ॲन्ड ड्रायक्लिनर्स</span>
+          <span class="font-sans font-bold text-[10px] text-neutral-900">ॲन्ड ड्रायक्लिनर्स</span>
         </div>
       </div>
     </a>
@@ -607,7 +610,7 @@
             <span class="px-3.5 py-1 rounded-full bg-white/80 border border-white backdrop-blur-md font-mono text-[11px] font-bold text-neutral-900 shadow-sm">
               4.2 ★ (45 Google Reviews) · Women-Owned Laundry
             </span>
-            <span class="px-3.5 py-1 rounded-full bg-[#0E2AC5]/10 border border-[#0E2AC5]/25 backdrop-blur-md font-mono text-[11px] font-bold text-[#0E2AC5]">
+            <span class="px-3.5 py-1 rounded-full bg-[var(--theme-accent)]/15 border border-[var(--theme-accent)]/30 backdrop-blur-md font-mono text-[11px] font-bold text-neutral-950">
               Laxmi Chowk Rd, Hinjawadi Phase 1
             </span>
           </div>
@@ -626,11 +629,11 @@
         <div class="hero-anim-3 pointer-events-auto flex items-center gap-3 self-start lg:self-end">
           <a href="#section-drop" data-scroll-to="#section-drop"
              class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white/75 hover:bg-white border border-white backdrop-blur-xl shadow-lg transition-all group">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#0E2AC5] animate-ping"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[var(--theme-accent)] animate-ping"></span>
             <span class="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-neutral-900">
               Scroll to release bubbles from machine
             </span>
-            <svg class="w-4 h-4 text-[#0E2AC5] transition-transform group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="w-4 h-4 text-neutral-900 transition-transform group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>
             </svg>
           </a>
@@ -643,7 +646,7 @@
       <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
         <div class="lg:col-span-6 pointer-events-auto">
           <div class="reveal flex flex-wrap items-center gap-2.5">
-            <span class="font-mono text-[11px] tracking-[0.25em] uppercase text-[#0E2AC5]/80">
+            <span class="font-mono text-[11px] tracking-[0.25em] uppercase text-neutral-900 font-bold">
               [ 02 — Services &amp; Heavy Fabric Care ]
             </span>
             <span class="px-3.5 py-1 rounded-full bg-[#e1306c]/15 border border-[#e1306c]/35 backdrop-blur-md font-sans text-xs font-extrabold text-[#c91c55] shadow-sm">
@@ -665,27 +668,27 @@
                style="transition-delay: 0.24s;">
             <div class="flex items-center justify-between gap-2 mb-2.5">
               <span class="font-sans font-extrabold text-base signboard-marathi">स्टार लाँड्री ॲन्ड ड्रायक्लिनर्स</span>
-              <span class="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#0E2AC5] text-white font-bold">Home Delivery</span>
+              <span class="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--theme-accent)] text-neutral-950 font-black shadow-sm">Home Delivery</span>
             </div>
 
-            <p class="font-raleway text-[14.5px] font-medium leading-[1.45] text-neutral-800">
-              Washing, ironing, starching &amp; dry cleaning at <strong class="text-neutral-950">Laxmi Chowk Rd, Phase 1, Hinjawadi</strong>. Flat <strong class="text-[#0E2AC5]">₹30 (1 km)</strong> &amp; <strong class="text-[#0E2AC5]">₹50 (2 km)</strong> delivery with <strong class="text-neutral-950">no minimum clothes!</strong>
+            <p class="font-raleway text-[15.5px] font-medium leading-[1.55] text-neutral-800">
+              Washing, ironing, starching &amp; dry cleaning at <strong class="text-neutral-950 font-bold">Laxmi Chowk Rd, Phase 1, Hinjawadi</strong>. Flat <strong class="text-neutral-950 font-extrabold">₹30 (1 km)</strong> &amp; <strong class="text-neutral-950 font-extrabold">₹50 (2 km)</strong> delivery with <strong class="text-neutral-950 font-bold">no minimum clothes!</strong>
             </p>
 
             <div class="mt-4 flex flex-wrap items-center gap-2.5">
               <a href="tel:+918856865639"
-                 class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[#0E2AC5] hover:bg-[#091d8c] text-white text-xs font-bold transition-all shadow-sm">
+                 class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[var(--theme-accent)] hover:opacity-90 text-neutral-950 text-xs font-black transition-all shadow-sm">
                 <span>Call 088568 65639</span>
               </a>
               <a href="https://wa.me/918856865639?text=Hello%20Star%20Laundry%2C%20I%20want%20to%20schedule%20a%20laundry%20pickup%20in%20Hinjawadi."
                  target="_blank" rel="noopener noreferrer"
                  class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white hover:bg-neutral-50 border border-neutral-200 text-xs font-bold text-neutral-900 transition-all">
                 <span>WhatsApp Pickup</span>
-                <svg class="w-3.5 h-3.5 text-[#0E2AC5]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                <svg class="w-3.5 h-3.5 text-neutral-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
               </a>
             </div>
 
-            <div class="font-mono text-[10px] tracking-[0.15em] uppercase text-neutral-600 mt-4 pt-3 border-t border-neutral-900/10 flex items-center justify-between">
+            <div class="font-mono text-xs tracking-[0.15em] uppercase text-neutral-700 mt-4 pt-3 border-t border-neutral-900/10 flex items-center justify-between">
               <span>Open All Days · 8 AM – 10 PM</span>
               <span class="font-bold text-[#c91c55]">⚡ 2–3 Hr Express Available</span>
             </div>
@@ -700,11 +703,11 @@
             <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
               <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
               <div class="flex items-center justify-between">
-                <span class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">01 · Daily Wear</span>
+                <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">01 · Daily Wear</span>
                 <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
               </div>
               <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Wash &amp; Fold / Wash &amp; Iron</div>
-              <p class="mt-1 font-raleway text-[13px] leading-relaxed text-neutral-700">
+              <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
                 Available both <strong>Per-Piece</strong> and <strong>Per-Kg</strong>. Shirts, trousers, t-shirts, jeans, kurtas, bedsheets &amp; pillow covers.
               </p>
             </div>
@@ -715,11 +718,11 @@
             <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
               <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
               <div class="flex items-center justify-between">
-                <span class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">02 · Crisp Press</span>
+                <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">02 · Crisp Press</span>
                 <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
               </div>
               <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Professional Ironing &amp; Starching</div>
-              <p class="mt-1 font-raleway text-[13px] leading-relaxed text-neutral-700">
+              <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
                 Crisp normal ironing and starching services for regular and office wear.
               </p>
             </div>
@@ -729,11 +732,11 @@
             <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
               <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
               <div class="flex items-center justify-between">
-                <span class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">03 · Heavy &amp; Winter</span>
+                <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">03 · Heavy &amp; Winter</span>
                 <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
               </div>
               <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Blanket, Razai &amp; Curtains</div>
-              <p class="mt-1 font-raleway text-[13px] leading-relaxed text-neutral-700">
+              <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
                 Deep hygienic washing &amp; dry cleaning for heavy <strong>Blankets (कंबल), Razai / Quilts (रजाई)</strong>, comforters &amp; curtains.
               </p>
             </div>
@@ -743,11 +746,11 @@
             <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
               <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
               <div class="flex items-center justify-between">
-                <span class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">04 · Delicate Care</span>
+                <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">04 · Delicate Care</span>
                 <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
               </div>
               <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Suit, Blazer &amp; Saree Dry Clean</div>
-              <p class="mt-1 font-raleway text-[13px] leading-relaxed text-neutral-700">
+              <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
                 Expert stain removal &amp; polishing for <strong>2/3-Piece Suits, Blazers, Sherwanis, Silk Sarees, Paithanis &amp; Lehengas</strong>.
               </p>
             </div>
@@ -760,7 +763,7 @@
     <!-- SECTION 03 — SHAPE / FLAT-RATE DELIVERY -->
     <section id="section-shape" class="min-h-[100svh] flex flex-col justify-between py-28 md:py-36 px-6 md:px-12 pointer-events-none">
       <div class="pointer-events-auto max-w-2xl">
-        <div class="reveal font-mono text-[11px] tracking-[0.25em] uppercase text-[#0E2AC5]/80">
+        <div class="reveal font-mono text-[11px] tracking-[0.25em] uppercase text-neutral-900 font-bold">
           [ 03 — Flat-Rate Pickup &amp; 2–3 Hr Express ]
         </div>
         <h2 class="reveal mt-5 font-raleway font-medium text-[2.6rem] leading-[1.0] sm:text-6xl md:text-[78px] md:leading-[0.92] tracking-tight text-neutral-950"
@@ -770,36 +773,36 @@
 
         <div class="reveal mt-7 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-xl" style="transition-delay: 0.18s;">
           <div class="rounded-2xl bg-white/45 backdrop-blur-xl border border-white/80 p-4 shadow-sm">
-            <div class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">Up to 1 KM</div>
+            <div class="font-mono text-[10.5px] uppercase tracking-wider text-neutral-900 font-bold">Up to 1 KM</div>
             <div class="mt-1 font-raleway text-2xl font-black text-neutral-950">₹30 Flat</div>
-            <div class="mt-0.5 font-raleway text-xs text-neutral-700">No minimum clothes required</div>
+            <div class="mt-0.5 font-raleway text-[13.5px] text-neutral-700">No minimum clothes required</div>
           </div>
           <div class="rounded-2xl bg-white/45 backdrop-blur-xl border border-white/80 p-4 shadow-sm">
-            <div class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">Up to 2 KM</div>
+            <div class="font-mono text-[10.5px] uppercase tracking-wider text-neutral-900 font-bold">Up to 2 KM</div>
             <div class="mt-1 font-raleway text-2xl font-black text-neutral-950">₹50 Flat</div>
-            <div class="mt-0.5 font-raleway text-xs text-neutral-700">Even 1–2 urgent pieces!</div>
+            <div class="mt-0.5 font-raleway text-[13.5px] text-neutral-700">Even 1–2 urgent pieces!</div>
           </div>
           <div class="rounded-2xl bg-[#e1306c]/15 backdrop-blur-xl border border-[#e1306c]/35 p-4 shadow-sm">
-            <div class="font-mono text-[10px] uppercase tracking-wider text-[#b8184e] font-bold">Urgent Express</div>
+            <div class="font-mono text-[10.5px] uppercase tracking-wider text-[#b8184e] font-bold">Urgent Express</div>
             <div class="mt-1 font-raleway text-2xl font-black text-neutral-950">2–3 Hours</div>
-            <div class="mt-0.5 font-raleway text-xs text-neutral-800">Call at 12 PM → Ready by 3 PM</div>
+            <div class="mt-0.5 font-raleway text-[13.5px] text-neutral-800">Call at 12 PM → Ready by 3 PM</div>
           </div>
         </div>
       </div>
 
       <div class="self-end max-w-md text-left md:text-right pointer-events-auto mt-12 md:mt-0">
-        <p class="reveal font-raleway text-[15px] md:text-[18px] leading-[1.55] text-neutral-800 bg-white/35 backdrop-blur-xl p-5 rounded-3xl border border-white/70"
+        <p class="reveal font-raleway text-[16px] md:text-[19px] leading-[1.6] text-neutral-800 bg-white/35 backdrop-blur-xl p-5 rounded-3xl border border-white/70"
            style="transition-delay: 0.2s;">
-          <strong class="text-neutral-950">No minimum piece condition!</strong> Whether you have a full week's load or just 1–2 emergency office outfits, we pick up and deliver across Laxmi Chowk &amp; Hinjawadi Phase 1. Need it urgently? Ask for our <strong class="text-[#c91c55]">2 to 3 Hour Express Service</strong>.
+          <strong class="text-neutral-950 font-bold">No minimum piece condition!</strong> Whether you have a full week's load or just 1–2 emergency office outfits, we pick up and deliver across Laxmi Chowk &amp; Hinjawadi Phase 1. Need it urgently? Ask for our <strong class="text-[#c91c55] font-bold">2 to 3 Hour Express Service</strong>.
         </p>
 
         <div class="reveal mt-5 flex flex-wrap md:justify-end gap-2.5" style="transition-delay: 0.28s;">
           <a href="tel:+918856865639"
-             class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-neutral-950 text-white hover:bg-[#0E2AC5] transition-colors font-raleway text-xs font-bold shadow-md">
+             class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-neutral-950 text-white hover:bg-[var(--theme-accent)] hover:text-neutral-950 transition-colors font-raleway text-xs font-bold shadow-md">
             <span>Call for 2–3 Hr Express Pickup</span>
           </a>
           <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/65 bg-white/45 backdrop-blur-md text-neutral-800">
-            <svg class="w-3.5 h-3.5 text-[#0E2AC5]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="w-3.5 h-3.5 text-neutral-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/>
             </svg>
             <span class="font-mono text-[10px] uppercase tracking-[0.18em]">Swipe through the heart</span>
@@ -811,7 +814,7 @@
     <!-- SECTION 04 — B2B LAUNDRY MANAGEMENT APP (NO PRICE MENTION) -->
     <section id="section-release" class="min-h-[100svh] mx-auto flex flex-col items-center justify-center text-center py-28 md:py-36 px-6 md:px-12 max-w-4xl pointer-events-none">
       <div class="pointer-events-auto">
-        <div class="reveal font-mono text-[11px] tracking-[0.25em] uppercase text-[#0E2AC5]/80">
+        <div class="reveal font-mono text-[11px] tracking-[0.25em] uppercase text-neutral-900 font-bold">
           [ 04 — B2B Laundry Management App ]
         </div>
 
@@ -830,7 +833,7 @@
           <span class="px-4 py-2 rounded-full bg-white/60 border border-white/85 backdrop-blur-md font-raleway text-xs font-bold text-neutral-900 shadow-sm">
             📊 Customer &amp; Order History
           </span>
-          <span class="px-4 py-2 rounded-full bg-white/60 border border-white/85 backdrop-blur-md font-raleway text-xs font-bold text-[#0E2AC5] shadow-sm">
+          <span class="px-4 py-2 rounded-full bg-white/60 border border-white/85 backdrop-blur-md font-raleway text-xs font-bold text-neutral-950 shadow-sm">
             📒 Digital Khata Tracking
           </span>
           <span class="px-4 py-2 rounded-full bg-white/60 border border-white/85 backdrop-blur-md font-raleway text-xs font-bold text-neutral-900 shadow-sm">
@@ -841,14 +844,14 @@
         <!-- CTA Buttons -->
         <div class="reveal mt-9 flex flex-wrap items-center justify-center gap-3" style="transition-delay: 0.38s;">
           <a href="tel:+918856865639"
-             class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-neutral-950 text-white font-raleway text-sm font-bold shadow-lg hover:bg-[#0E2AC5] transition-colors">
+             class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-neutral-950 text-white font-raleway text-sm font-bold shadow-lg hover:bg-[var(--theme-accent)] hover:text-neutral-950 transition-colors">
             <span>Contact us for a Demo</span>
           </a>
           <a href="https://app.starlaundry.in"
              target="_blank" rel="noopener noreferrer"
              class="inline-flex items-center gap-2 px-5 py-3.5 rounded-full border border-white/80 bg-white/55 backdrop-blur-md text-neutral-900 font-raleway text-sm font-bold hover:bg-white/85 transition-colors">
             <span>Visit Web App</span>
-            <svg class="w-4 h-4 text-[#0E2AC5]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-4 h-4 text-neutral-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </div>
@@ -859,35 +862,35 @@
   <!-- FOOTER -->
   <footer id="site-footer" class="relative z-10 bg-neutral-950 text-white rounded-t-[2.5rem] md:rounded-t-[4rem] overflow-hidden">
     <div class="pointer-events-none absolute -top-32 -right-24 w-[28rem] h-[28rem] rounded-full blur-2xl"
-         style="background: radial-gradient(circle, #2f69ff66 0%, transparent 65%);"></div>
+         style="background: radial-gradient(circle, var(--theme-accent-light) 0%, transparent 65%); opacity: 0.35;"></div>
     <div class="pointer-events-none absolute -bottom-40 -left-24 w-[32rem] h-[32rem] rounded-full blur-2xl"
-         style="background: radial-gradient(circle, #5175ff44 0%, transparent 65%);"></div>
+         style="background: radial-gradient(circle, var(--theme-accent) 0%, transparent 65%); opacity: 0.25;"></div>
 
     <div class="border-b border-white/10 py-5 overflow-hidden">
       <div class="marquee-track font-raleway font-medium text-white/90" style="font-size: clamp(26px, 5.5vw, 58px);">
         <div class="flex items-center">
           <span class="px-8">Star Laundry &amp; Dry Cleaners</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--theme-accent)] inline-block"></span>
           <span class="px-8 font-sans">स्टार लाँड्री ॲन्ड ड्रायक्लिनर्स</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--theme-accent)] inline-block"></span>
           <span class="px-8">₹30 (1 km) · ₹50 (2 km) Delivery</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--theme-accent)] inline-block"></span>
           <span class="px-8 text-amber-300">2–3 Hr Express Service</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--theme-accent)] inline-block"></span>
           <span class="px-8">Blanket · Razai · Suit · Saree</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--theme-accent)] inline-block"></span>
         </div>
         <div class="flex items-center">
           <span class="px-8">Star Laundry &amp; Dry Cleaners</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--theme-accent)] inline-block"></span>
           <span class="px-8 font-sans">स्टार लाँड्री ॲन्ड ड्रायक्लिनर्स</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--theme-accent)] inline-block"></span>
           <span class="px-8">₹30 (1 km) · ₹50 (2 km) Delivery</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--theme-accent)] inline-block"></span>
           <span class="px-8 text-amber-300">2–3 Hr Express Service</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--theme-accent)] inline-block"></span>
           <span class="px-8">Blanket · Razai · Suit · Saree</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--theme-accent)] inline-block"></span>
         </div>
       </div>
     </div>
@@ -918,7 +921,7 @@
                target="_blank" rel="noopener noreferrer"
                class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 font-raleway text-sm font-medium text-white/90 transition-colors">
               <span>WhatsApp Pickup</span>
-              <svg class="w-4 h-4 text-[#5175ff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+              <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
             </a>
           </div>
         </div>
@@ -948,10 +951,10 @@
               <li><a href="https://www.google.com/maps/search/?api=1&query=Star+Laundry+Laxmi+Chowk+Rd+Phase+1+Hinjawadi+Pune" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Laxmi Chowk Rd, Phase 1, Hinjawadi</a></li>
               <li>Open All Days: 8 AM – 10 PM</li>
               <li>4.2 ★ Google Rating (45 Reviews)</li>
-              <li class="text-[#5175ff] font-medium">Women-Owned Business ♥</li>
+              <li class="text-white font-medium">Women-Owned Business ♥</li>
             </ul>
             <iframe src="https://maps.google.com/maps?q=Star%20Laundry,%20Laxmi%20Chowk%20Rd,%20Hinjawadi,%20Pune&t=&z=16&ie=UTF8&iwloc=&output=embed" class="w-full h-40 rounded-xl border border-white/20 mt-4 opacity-80 hover:opacity-100 transition-opacity" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-            <a href="https://www.google.com/maps/place/Star+Laundry/@18.5995882,73.7311897,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc2bb1a658a82c7:0x65802a1dec11e9a8!8m2!3d18.5995882!4d73.7337646" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-[13px] text-[#5175ff] hover:text-white font-semibold transition-colors">
+            <a href="https://www.google.com/maps/place/Star+Laundry/@18.5995882,73.7311897,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc2bb1a658a82c7:0x65802a1dec11e9a8!8m2!3d18.5995882!4d73.7337646" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-[13px] text-white hover:text-neutral-300 underline underline-offset-4 font-semibold transition-colors">
               📍 Get Directions on Google Maps
             </a>
           </div>
@@ -963,7 +966,7 @@
           <div class="bg-white/95 px-3 py-1 rounded-xl">
             <svg class="w-24 h-9"><use href="#star-laundry-logo" /></svg>
           </div>
-          <span class="w-2 h-2 rounded-full bg-[#2f69ff]"></span>
+          <span class="w-2 h-2 rounded-full bg-[var(--theme-accent)]"></span>
           <span class="font-mono text-[11px] text-white/50">
             © 2026 Star Laundry &amp; Dry Cleaners — Laxmi Chowk Rd, Hinjawadi, Pune 411057.
           </span>
@@ -1233,7 +1236,7 @@
     requestAnimationFrame(tickLoader);
 
     /* ---------------------------------------------------------------------
-       3. THREE.JS WEBGL SCENE WITH BACKGROUND AUTO-PAUSE
+       3. THREE.JS WEBGL SCENE (CONTINUOUS RENDERING & PHYSICS)
        --------------------------------------------------------------------- */
     const container = document.getElementById('canvas-container');
     const canvas = document.getElementById('gravity-canvas');
@@ -1539,6 +1542,12 @@
         curPal[role].copy(palHero[role]).lerp(palLime[role], bLime).lerp(palPink[role], bPink);
       }
       hemiLight.groundColor.copy(curPal.medium);
+      if (curPal.medium?.getStyle) {
+        document.documentElement.style.setProperty('--theme-accent', curPal.medium.getStyle());
+      }
+      if (curPal.light?.getStyle) {
+        document.documentElement.style.setProperty('--theme-accent-light', curPal.light.getStyle());
+      }
 
       const isMouseInteracting = Math.abs(mousePos.x) < 0.99 || Math.abs(mousePos.y) < 0.99;
       mouseSpeed = isMouseInteracting ? mouseWorld3D.distanceTo(prevMouseWorld) : 0;
@@ -1592,9 +1601,9 @@
         if (flyF > 0.001) {
           const stagger = (b.id * 0.6180339887) % 1;
           const local = smoothstep(stagger * 0.55, stagger * 0.55 + 0.45, flyF);
-          b.velocity.z += 0.05 * local;
-          b.velocity.x += b.position.x * 0.006 * local;
-          b.velocity.y += b.position.y * 0.006 * local;
+          b.velocity.x += Math.sin(time * 0.8 + b.id) * 0.006 * local;
+          b.velocity.y += Math.cos(time * 0.6 + b.id) * 0.006 * local;
+          b.velocity.z += Math.sin(time * 0.5 + b.id) * 0.004 * local;
         }
 
         if (isMouseInteracting) {
@@ -1622,7 +1631,7 @@
         b.material.color.copy(c);
         b.material.emissive.copy(c);
 
-        b.material.opacity = flyF > 0.001 ? 1 - smoothstep(camZ - 2.6, camZ - 0.3, b.position.z) : 1;
+        b.material.opacity = 1;
 
         const drumScaleFactor = isOuterFloater ? 0.45 : 0.32;
         const baseVis = b.radius * lerp(1.0, drumScaleFactor, drumF);
@@ -1631,7 +1640,7 @@
         b.sphere.scale.setScalar(b.visualScale);
       }
 
-      const collideScale = 0.28 * (1 - 0.65 * drumF) * (1 - 0.93 * shapeF) * (1 - flyF);
+      const collideScale = 0.28 * (1 - 0.65 * drumF) * (1 - 0.93 * shapeF) * (1 - flyF * 0.35);
       const subSteps = 4;
       for (let step = 0; step < subSteps; step++) {
         for (let i = 0; i < balls.length; i++) {
@@ -1669,8 +1678,8 @@
       const zBound = 2.0;
       const restitution = 0.30 + 0.35 * dropF;
 
-      const contain = flyF < 0.5;
-      const zContain = flyF < 0.02;
+      const contain = true;
+      const zContain = true;
 
       for (let i = 0; i < balls.length; i++) {
         const b = balls[i];
