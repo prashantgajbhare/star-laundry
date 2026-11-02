@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased selection:bg-[#0E2AC5] selection:text-white">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>STAR LAUNDRY · स्टार लाँड्री ॲन्ड ड्रायक्लिनर्स — Hinjawadi, Pune</title>
+  <meta name="description" content="Star Laundry & Dry Cleaners (स्टार लाँड्री ॲन्ड ड्रायक्लिनर्स). Laxmi Chowk Rd, Phase 1, Hinjawadi, Pune 411057. Wash, Iron, Dry Clean, Blanket & Razai, 2-3 Hr Express Delivery, Flat ₹30 (1km) / ₹50 (2km) Pickup & Drop. Call 088568 65639." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Raleway:wght@400;500;600;700;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans Devanagari', 'sans-serif'],
+            display: ['Space Grotesk', 'Noto Sans Devanagari', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            raleway: ['Raleway', 'Noto Sans Devanagari', 'sans-serif'],
+          },
+          colors: {
+            accent: '#0E2AC5',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- ES Module Importmap for Three.js r0.160.0 -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --font-sans: "Inter", "Noto Sans Devanagari", sans-serif;
+      --font-display: "Space Grotesk", "Noto Sans Devanagari", sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --font-raleway: "Raleway", "Noto Sans Devanagari", sans-serif;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      color: #1a1a1a;
+      background-color: #f7fafc;
+      font-family: var(--font-raleway);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(14, 42, 197, 0.18);
+      border-radius: 99px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(14, 42, 197, 0.32);
+    }
+
+    /* Background Gradient Layer & Smooth Transitions */
+    .bg-stage-layer {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      pointer-events: none;
+      transition: opacity 1.2s cubic-bezier(0.65, 0, 0.35, 1), background 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    /* =====================================================================
+       CENTER WASHING MACHINE (#mc) + BUBBLES EMERGING FROM INSIDE THE DRUM
+       ===================================================================== */
+    #mc {
+      position: fixed;
+      left: 50%;
+      top: 44%;
+      height: min(58vh, 430px);
+      aspect-ratio: 240 / 300;
+      transform: translate(-50%, -48%);
+      z-index: -5;
+      pointer-events: none;
+      transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+    }
+    @media (max-width: 767px) {
+      #mc {
+        top: 40%;
+        height: min(46vh, 330px);
+      }
+    }
+    .mi {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+    }
+    body.scene-started .mi {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .mi > svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 28px 50px rgba(14, 42, 197, 0.25));
+      animation: machineWashShake 0.38s ease-in-out infinite alternate;
+    }
+    @keyframes machineWashShake {
+      0% { transform: translate(-1.5px, 0.5px) rotate(-0.45deg); }
+      50% { transform: translate(0px, -1px) rotate(0deg); }
+      100% { transform: translate(1.5px, 0.5px) rotate(0.45deg); }
+    }
+    .drum {
+      transform-origin: 120px 180px;
+      animation: drumSpin 2.1s linear infinite;
+    }
+    @keyframes drumSpin {
+      to { transform: rotate(360deg); }
+    }
+    .drum-foam {
+      transform-origin: 120px 180px;
+      animation: drumSpinReverse 3.4s linear infinite;
+    }
+    @keyframes drumSpinReverse {
+      to { transform: rotate(-360deg); }
+    }
+    .wv {
+      animation: waterWave 1.3s linear infinite;
+    }
+    @keyframes waterWave {
+      to { transform: translateX(-60px); }
+    }
+    .led {
+      animation: ledBlink 1.1s steps(2) infinite;
+    }
+    @keyframes ledBlink {
+      50% { opacity: 0.25; }
+    }
+
+    /* DOM Soap Bubbles erupting directly from the spinning drum center (50%, 60%) */
+    #bubs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .bb {
+      position: absolute;
+      left: 50%;
+      top: 60%;
+      width: var(--s);
+      height: var(--s);
+      margin-left: calc(var(--s) * -0.5);
+      margin-top: calc(var(--s) * -0.5);
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 28%, #ffffff 0%, rgba(210, 232, 255, 0.78) 32%, rgba(81, 117, 255, 0.32) 72%, rgba(255, 180, 210, 0.42) 100%);
+      border: 1.4px solid rgba(255, 255, 255, 0.95);
+      box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.95), 0 4px 14px rgba(14, 42, 197, 0.18);
+      opacity: 0;
+      animation: drumBubbleErupt var(--d) cubic-bezier(0.16, 0.84, 0.44, 1) infinite;
+      animation-delay: var(--dl);
+    }
+    @keyframes drumBubbleErupt {
+      0% {
+        transform: translate(0px, 0px) scale(0.15);
+        opacity: 0;
+      }
+      14% {
+        transform: translate(calc(var(--x) * 0.22), calc(var(--y) * 0.16)) scale(0.72);
+        opacity: 0.96;
+      }
+      50% {
+        opacity: 0.92;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    /* =====================================================================
+       CUSTOM GOL SOAP BUBBLE MOUSE CURSOR + MINI BUBBLE TRAIL
+       ===================================================================== */
+    @media (pointer: fine) {
+      *, *::before, *::after, a, button, input, select, textarea {
+        cursor: none !important;
+      }
+    }
+    #bubble-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      margin-left: -20px;
+      margin-top: -20px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      background: radial-gradient(
+        circle at 32% 28%,
+        rgba(255, 255, 255, 0.92) 0%,
+        rgba(255, 255, 255, 0.35) 18%,
+        rgba(140, 195, 255, 0.22) 52%,
+        rgba(47, 105, 255, 0.34) 78%,
+        rgba(255, 130, 190, 0.48) 100%
+      );
+      border: 1.6px solid rgba(255, 255, 255, 0.92);
+      box-shadow:
+        inset 0 0 12px rgba(255, 255, 255, 0.9),
+        inset -3px -4px 10px rgba(81, 117, 255, 0.38),
+        0 6px 20px rgba(14, 42, 197, 0.24);
+      backdrop-filter: blur(1.5px) brightness(1.06);
+      -webkit-backdrop-filter: blur(1.5px) brightness(1.06);
+      transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  height 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  margin 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.2s ease,
+                  border-color 0.2s ease;
+      will-change: transform, width, height;
+    }
+    /* Glossy top-left highlight dot on the bubble cursor */
+    #bubble-cursor::before {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      width: 10px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.96);
+      transform: rotate(-28deg);
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+    }
+    /* Secondary bottom-right iridescent reflection arc */
+    #bubble-cursor::after {
+      content: "";
+      position: absolute;
+      bottom: 6px;
+      right: 7px;
+      width: 8px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 220, 240, 0.85);
+      transform: rotate(-28deg);
+    }
+    #bubble-cursor.is-hovering {
+      width: 58px;
+      height: 58px;
+      margin-left: -29px;
+      margin-top: -29px;
+      border-color: #ffffff;
+      box-shadow:
+        inset 0 0 16px rgba(255, 255, 255, 0.95),
+        inset -4px -5px 14px rgba(225, 48, 108, 0.38),
+        0 8px 26px rgba(14, 42, 197, 0.32);
+    }
+    #bubble-cursor.is-down {
+      width: 32px;
+      height: 32px;
+      margin-left: -16px;
+      margin-top: -16px;
+    }
+    #bubble-trail-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      overflow: hidden;
+    }
+    .trail-bubble {
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle at 30% 30%, #ffffff 0%, rgba(168, 210, 255, 0.55) 45%, rgba(81, 117, 255, 0.25) 85%, rgba(255, 166, 179, 0.4) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.9);
+      animation: trailBubblePop 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes trailBubblePop {
+      0% {
+        opacity: 0.9;
+        transform: translate(var(--tx0), var(--ty0)) scale(0.45);
+      }
+      70% {
+        opacity: 0.75;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx1), var(--ty1)) scale(1.25);
+      }
+    }
+    @media (pointer: coarse) {
+      #bubble-cursor, #bubble-trail-layer {
+        display: none !important;
+      }
+    }
+
+    /* Pre-roll Loader Staggered Spring Reveal */
+    .loader-item {
+      opacity: 0;
+      transform: translateY(18px);
+      filter: blur(6px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.175, 0.885, 0.32, 1.15),
+                  filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .loader-item.in {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0px);
+    }
+
+    /* Header & Hero Entrance Animations */
+    #site-header {
+      opacity: 0;
+      transform: translateY(-16px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body.scene-started #site-header {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #hero-section {
+      opacity: 0;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body.scene-started #hero-section {
+      opacity: 1;
+    }
+
+    .hero-anim-1 {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+    }
+    .hero-anim-2 {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.28s,
+                  transform 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.28s;
+    }
+    .hero-anim-3 {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.45s,
+                  transform 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.45s;
+    }
+    body.scene-started .hero-anim-1,
+    body.scene-started .hero-anim-2,
+    body.scene-started .hero-anim-3 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Section 02–04 IntersectionObserver Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(42px);
+      filter: blur(8px);
+      transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0px);
+    }
+
+    /* Footer Fade-Up Reveal */
+    .footer-reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .footer-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Studio Controls Drawer Spring Transition */
+    #studio-drawer {
+      transform: translateX(100%);
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #studio-drawer.open {
+      transform: translateX(0%);
+    }
+    #drawer-scrim {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #drawer-scrim.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Infinite Marquee Ticker (26s linear infinite) */
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: marqueeScroll 26s linear infinite;
+    }
+
+    /* Glassmorphic Highlights */
+    .glass-btn-shadow {
+      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.75), 0 8px 30px rgba(0, 0, 0, 0.05);
+    }
+    .stat-card-ring {
+      box-shadow: 0 14px 40px -12px rgba(14, 42, 197, 0.18);
+    }
+    .blue-orb {
+      background: radial-gradient(circle at 50% 30%, #5175ff 0%, #0e2ac5 55%, #020b40 100%);
+    }
+    .blue-dot-glow {
+      background: radial-gradient(circle at 35% 30%, #5175ff, #0e2ac5);
+      box-shadow: 0 0 8px rgba(47, 105, 255, 0.6);
+    }
+    .signboard-marathi {
+      color: #d82b63;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.95), 0 1px 2px rgba(14, 42, 197, 0.25);
+    }
+  </style>
+</head>
+<body class="relative min-h-screen text-[#1a1a1a]">
+
+  <!-- =====================================================================
+       REUSABLE INLINE SVG DEFINITIONS:
+       EXACT SHOP SIGNBOARD LOGO ("STAR LAUNDRY" WITH 5-POINTED STAR + HANGER)
+       ===================================================================== -->
+  <svg width="0" height="0" class="absolute pointer-events-none overflow-hidden" aria-hidden="true">
+    <defs>
+      <!-- Exact recreation of the user's signboard logo:
+           5-pointed tilted star whose top-right arm loops into a clothes hanger hook,
+           paired with angled serif "STAR / LAUNDRY" typography and dual navy/crimson strokes -->
+      <symbol id="star-laundry-logo" viewBox="0 0 350 155">
+        <defs>
+          <filter id="logoGlow" x="-15%" y="-15%" width="130%" height="130%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#ffffff" flood-opacity="0.95" />
+          </filter>
+        </defs>
+        <g filter="url(#logoGlow)">
+          <!-- Crimson/Magenta offset accent stroke (exact dual-tone look from board) -->
+          <path d="M 101 112
+                   L 64 134
+                   L 74 90
+                   L 38 62
+                   L 83 58
+                   L 100 18
+                   L 114 50
+                   L 168 42
+                   L 126 32
+                   C 129 22, 142 15, 138 6
+                   C 134 -2, 118 0, 117 11"
+                fill="none"
+                stroke="#a81c4b"
+                stroke-width="7.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                transform="translate(2.5, 2.2)" />
+
+          <!-- Main Deep Navy Blue Star + Hanger Hook Path -->
+          <path d="M 101 112
+                   L 64 134
+                   L 74 90
+                   L 38 62
+                   L 83 58
+                   L 100 18
+                   L 114 50
+                   L 168 42
+                   L 126 32
+                   C 129 22, 142 15, 138 6
+                   C 134 -2, 118 0, 117 11"
+                fill="none"
+                stroke="#1d295e"
+                stroke-width="6.5"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+
+          <!-- Tilted Bold Serif "STAR" & "LAUNDRY" exactly as on the signboard -->
+          <g transform="rotate(-11.5, 185, 88)">
+            <!-- Subtle crimson shadow text -->
+            <text x="114" y="88"
+                  font-family="Georgia, 'Times New Roman', serif"
+                  font-weight="900"
+                  font-size="45"
+                  letter-spacing="1.5"
+                  fill="#a81c4b"
+                  opacity="0.65">STAR</text>
+            <text x="74" y="133"
+                  font-family="Georgia, 'Times New Roman', serif"
+                  font-weight="900"
+                  font-size="47"
+                  letter-spacing="1.2"
+                  fill="#a81c4b"
+                  opacity="0.65">LAUNDRY</text>
+
+            <!-- Primary Navy Serif Text -->
+            <text x="112" y="86"
+                  font-family="Georgia, 'Times New Roman', serif"
+                  font-weight="900"
+                  font-size="45"
+                  letter-spacing="1.5"
+                  fill="#212f69"
+                  stroke="#ffffff"
+                  stroke-width="1.2"
+                  paint-order="stroke fill">STAR</text>
+            <text x="72" y="131"
+                  font-family="Georgia, 'Times New Roman', serif"
+                  font-weight="900"
+                  font-size="47"
+                  letter-spacing="1.2"
+                  fill="#212f69"
+                  stroke="#ffffff"
+                  stroke-width="1.2"
+                  paint-order="stroke fill">LAUNDRY</text>
+          </g>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- =====================================================================
+       FIXED BACKGROUND GRADIENT LAYER (-z-10)
+       Smoothly blends between Stage 0 (Hero), Stage 1 (Lime), Stage 2 (Pink)
+       ===================================================================== -->
+  <div id="bg-layer-0" class="bg-stage-layer" style="background: radial-gradient(circle at center, #ffffff 0%, #ecefff 35%, #c2d1ff 100%); opacity: 1;"></div>
+  <div id="bg-layer-1" class="bg-stage-layer" style="background: radial-gradient(circle at center, #ffffff 0%, #fbffe5 38%, #e8ff9c 100%); opacity: 0;"></div>
+  <div id="bg-layer-2" class="bg-stage-layer" style="background: radial-gradient(circle at center, #ffffff 0%, #fff0f1 38%, #ffd1d5 100%); opacity: 0;"></div>
+
+  <!-- =====================================================================
+       ANIMATED CENTER WASHING MACHINE (#mc, z-index: -5)
+       Spawns rising soap bubbles (#bubs) & 3D WebGL spheres directly from drum
+       ===================================================================== -->
+  <div id="mc" aria-hidden="true">
+    <div class="mi">
+      <svg viewBox="0 0 240 300" width="100%" height="100%">
+        <defs>
+          <clipPath id="drumClip">
+            <circle cx="120" cy="180" r="64" />
+          </clipPath>
+          <linearGradient id="bodySheenGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="65%" stop-color="#f5f8ff" />
+            <stop offset="100%" stop-color="#e2ecff" />
+          </linearGradient>
+          <linearGradient id="doorRingGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#5175ff" />
+            <stop offset="50%" stop-color="#0e2ac5" />
+            <stop offset="100%" stop-color="#141e4d" />
+          </linearGradient>
+          <radialGradient id="drumDepthGrad" cx="50%" cy="45%" r="60%">
+            <stop offset="0%" stop-color="#d8e7ff" />
+            <stop offset="65%" stop-color="#99beff" />
+            <stop offset="100%" stop-color="#3a66ff" />
+          </radialGradient>
+        </defs>
+
+        <!-- Machine Outer Body with 3D Glossy Bevel -->
+        <rect x="20" y="10" width="200" height="280" rx="30" fill="url(#bodySheenGrad)" stroke="#b5c9ff" stroke-width="3.5" />
+        <rect x="25" y="15" width="190" height="270" rx="26" fill="none" stroke="#ffffff" stroke-width="2.5" />
+
+        <!-- Top Control Panel Divider -->
+        <line x1="20" y1="68" x2="220" y2="68" stroke="#cddbff" stroke-width="3" />
+
+        <!-- Left Detergent Drawer with STAR LAUNDRY mini label -->
+        <rect x="30" y="24" width="46" height="26" rx="6" fill="#eef3ff" stroke="#b5c9ff" stroke-width="2" />
+        <line x1="41" y1="37" x2="65" y2="37" stroke="#0e2ac5" stroke-width="2.5" stroke-linecap="round" />
+
+        <!-- Center Rotary Program Dial -->
+        <circle cx="98" cy="37" r="14" fill="#eef2ff" stroke="#99b5ff" stroke-width="2.5" />
+        <circle cx="98" cy="37" r="5" fill="#0e2ac5" />
+        <line x1="98" y1="37" x2="98" y2="25" stroke="#0e2ac5" stroke-width="3" stroke-linecap="round" />
+
+        <!-- Digital LED Timer Display -->
+        <rect x="122" y="24" width="66" height="26" rx="8" fill="#0a1647" stroke="#5175ff" stroke-width="1.2" />
+        <text x="155" y="38" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="9.5" fill="#7ce8ff">SPIN·WASH</text>
+        <text x="155" y="47" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="6.5" fill="#a8c1ff">8AM - 10PM</text>
+
+        <!-- Pulsing Status LED -->
+        <circle class="led" cx="201" cy="37" r="6" fill="#e1306c" />
+
+        <!-- Outer Porthole Housing -->
+        <circle cx="120" cy="180" r="86" fill="#e6eeff" stroke="#c5d6ff" stroke-width="2" />
+        <circle cx="120" cy="180" r="78" fill="none" stroke="url(#doorRingGrad)" stroke-width="13" />
+        <circle cx="120" cy="180" r="70" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.7" />
+        <!-- Door Hinge & Handle Accent -->
+        <rect x="190" y="164" width="11" height="32" rx="4.5" fill="#141e4d" />
+
+        <!-- Inner Drum Background -->
+        <circle cx="120" cy="180" r="64" fill="url(#drumDepthGrad)" />
+
+        <!-- Inside the Spinning Drum (Clipped to R=64) -->
+        <g clip-path="url(#drumClip)">
+          <!-- Tumbling Clothes & Colored Suds (Spinning) -->
+          <g class="drum">
+            <!-- Stainless drum paddles -->
+            <path d="M120 116 L129 138 L111 138 Z" fill="#7ca2f5" opacity="0.7" />
+            <path d="M184 180 L162 189 L162 171 Z" fill="#7ca2f5" opacity="0.7" />
+            <path d="M56 180 L78 171 L78 189 Z" fill="#7ca2f5" opacity="0.7" />
+            <!-- Tumbling garments & foam pockets -->
+            <path d="M88 138 C110 122, 148 134, 158 160 C168 186, 136 218, 108 206 C82 194, 68 154, 88 138 Z" fill="#2554e8" opacity="0.55" />
+            <circle cx="150" cy="156" r="15" fill="#e1306c" opacity="0.92" />
+            <circle cx="92" cy="196" r="17" fill="#ffffff" opacity="0.96" />
+            <circle cx="130" cy="214" r="13" fill="#0e2ac5" opacity="0.92" />
+            <circle cx="90" cy="152" r="12" fill="#ffd1d5" opacity="0.94" />
+            <circle cx="146" cy="194" r="11" fill="#e1fc03" opacity="0.88" />
+          </g>
+
+          <!-- Sloshing Water Wave Layer -->
+          <g class="wv">
+            <path d="M 30 184 q 15 -15 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 V 260 H 30 Z" fill="#4f7bff" opacity="0.76" />
+            <path d="M 15 194 q 15 -13 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 V 260 H 15 Z" fill="#0e2ac5" opacity="0.52" />
+          </g>
+
+          <!-- Counter-rotating White Suds Foam Bubbles inside Drum -->
+          <g class="drum-foam">
+            <circle cx="100" cy="174" r="9.5" fill="#ffffff" opacity="0.95" />
+            <circle cx="140" cy="168" r="8.5" fill="#ffffff" opacity="0.92" />
+            <circle cx="120" cy="200" r="10.5" fill="#ffffff" opacity="0.95" />
+            <circle cx="112" cy="158" r="7.5" fill="#ffffff" opacity="0.88" />
+            <circle cx="134" cy="188" r="8" fill="#ffffff" opacity="0.92" />
+            <circle cx="104" cy="192" r="6.5" fill="#d9ecff" opacity="0.9" />
+            <circle cx="126" cy="174" r="7" fill="#d9ecff" opacity="0.9" />
+          </g>
+        </g>
+
+        <!-- Glass Porthole Specular Gloss Highlight -->
+        <path d="M 76 148 A 56 56 0 0 1 116 122" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity="0.85" />
+        <path d="M 154 218 A 54 54 0 0 1 126 232" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.5" />
+
+        <!-- Bottom Filter Flap & Stabilizer Feet -->
+        <rect x="166" y="256" width="32" height="18" rx="4" fill="#eef3ff" stroke="#b5c9ff" stroke-width="1.5" />
+        <rect x="44" y="286" width="28" height="8" rx="3.5" fill="#8a98c9" />
+        <rect x="168" y="286" width="28" height="8" rx="3.5" fill="#8a98c9" />
+      </svg>
+
+      <!-- DOM Soap Bubbles Container (Bubbles spawn from center of drum & rise out) -->
+      <div id="bubs"></div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       CUSTOM GOL SOAP BUBBLE CURSOR & TRAIL CONTAINER
+       ===================================================================== -->
+  <div id="bubble-trail-layer" aria-hidden="true"></div>
+  <div id="bubble-cursor" aria-hidden="true"></div>
+
+  <!-- =====================================================================
+       FIXED FULL-SCREEN THREE.JS WEBGL CANVAS (z-0, pointer-events: none)
+       ===================================================================== -->
+  <div id="canvas-container" class="fixed inset-0 z-0 pointer-events-none">
+    <canvas id="gravity-canvas" class="block w-full h-full pointer-events-none"></canvas>
+  </div>
+
+  <!-- =====================================================================
+       PRE-ROLL LOADER / REVEAL (z-100)
+       ===================================================================== -->
+  <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-[22px]"
+       style="background: radial-gradient(circle at 50% 42%, #ffffff 0%, #eef2ff 45%, #dbe4ff 100%); transition: opacity 0.55s cubic-bezier(0.65, 0, 0.35, 1);">
+    <!-- Signboard Logo Preview on Loader -->
+    <div class="loader-item flex flex-col items-center">
+      <svg class="w-44 h-20"><use href="#star-laundry-logo" /></svg>
+      <span class="font-sans font-extrabold text-sm tracking-wide signboard-marathi -mt-1">
+        स्टार लाँड्री ॲन्ड ड्रायक्लिनर्स
+      </span>
+    </div>
+
+    <!-- 1. Status line -->
+    <div id="loader-status" class="loader-item font-mono text-[10px] tracking-[0.28em] uppercase text-[#6b7bb5]">
+      Filling the washing drum
+    </div>
+
+    <!-- 2. Progress bar -->
+    <div class="loader-item rounded-[99px] overflow-visible"
+         style="width: clamp(180px, 32vw, 280px); height: 2px; background: rgba(14, 42, 197, 0.14);">
+      <div id="loader-bar" class="h-full rounded-[99px]"
+           style="width: 0%; background: linear-gradient(90deg, #5175ff 0%, #0e2ac5 100%); box-shadow: 0 0 14px rgba(47, 105, 255, 0.55); transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);"></div>
+    </div>
+
+    <!-- 3. Counter -->
+    <div id="loader-counter" class="loader-item font-mono text-[11px] tracking-[0.1em] text-[#0e2ac5] font-bold tabular-nums">
+      000%
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       HEADER (FIXED, z-30)
+       Includes Exact Signboard Star+Hanger Logo & Marathi Subtitle
+       ===================================================================== -->
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-30 h-20 md:h-24 px-4 sm:px-6 md:px-12 flex items-center justify-between pointer-events-none">
+    <!-- Left: Exact Signboard Star + Hanger Logo -->
+    <a href="#hero-section" data-scroll-to="#hero-section" class="pointer-events-auto flex items-center gap-2.5 group">
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-white/45 border border-white/75 backdrop-blur-xl glass-btn-shadow transition-transform duration-300 group-hover:scale-[1.02]">
+        <svg class="w-28 sm:w-32 h-11 sm:h-12 shrink-0" aria-label="Star Laundry Logo">
+          <use href="#star-laundry-logo" />
+        </svg>
+        <div class="hidden sm:flex flex-col border-l border-[#0E2AC5]/15 pl-2.5 leading-tight">
+          <span class="font-sans font-extrabold text-[13px] signboard-marathi">
+            स्टार लाँड्री
+          </span>
+          <span class="font-sans font-bold text-[10px] text-[#0e4da4]">
+            ॲन्ड ड्रायक्लिनर्स
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Center (lg+ only): Nav Links -->
+    <nav class="hidden lg:flex items-center gap-9 pointer-events-auto font-raleway text-[14px] font-semibold text-neutral-900 bg-white/30 px-6 py-2.5 rounded-full border border-white/60 backdrop-blur-xl">
+      <a href="#hero-section" data-scroll-to="#hero-section" class="transition-opacity hover:opacity-60">Home</a>
+      <a href="#section-drop" data-scroll-to="#section-drop" class="transition-opacity hover:opacity-60">Services &amp; Heavy Items</a>
+      <a href="#section-shape" data-scroll-to="#section-shape" class="transition-opacity hover:opacity-60">₹30/₹50 Delivery &amp; Express</a>
+      <a href="#section-release" data-scroll-to="#section-release" class="transition-opacity hover:opacity-60">Digital App &amp; UPI</a>
+      <a href="#site-footer" data-scroll-to="#site-footer" class="transition-opacity hover:opacity-60">Contact</a>
+    </nav>
+
+    <!-- Right: Controls (Palette Sliders + Call Now Pill) -->
+    <div class="flex items-center gap-2 md:gap-3 pointer-events-auto">
+      <!-- 1. Round Sliders Icon Button (Bubble Colors) -->
+      <button id="open-drawer-btn" type="button" aria-label="Bubble Colors & Studio Controls"
+              class="w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center border border-white/50 bg-white/30 backdrop-blur-xl glass-btn-shadow hover:bg-white/50 transition-all text-neutral-900">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="21" x2="14" y1="4" y2="4"></line>
+          <line x1="10" x2="3" y1="4" y2="4"></line>
+          <line x1="21" x2="12" y1="12" y2="12"></line>
+          <line x1="8" x2="3" y1="12" y2="12"></line>
+          <line x1="21" x2="16" y1="20" y2="20"></line>
+          <line x1="12" x2="3" y1="20" y2="20"></line>
+          <line x1="14" x2="14" y1="2" y2="6"></line>
+          <line x1="8" x2="8" y1="10" y2="14"></line>
+          <line x1="16" x2="16" y1="18" y2="22"></line>
+        </svg>
+      </button>
+
+      <!-- 2. "Call 088568 65639" Pill -->
+      <a href="tel:+918856865639"
+         class="group flex items-center gap-2.5 pl-4 md:pl-5 pr-1.5 py-1.5 rounded-full bg-white/30 backdrop-blur-xl border border-t-white/90 border-b-white/85 border-x-white/30 glass-btn-shadow transition-all hover:bg-white/50">
+        <span class="font-raleway text-[12px] sm:text-[13px] md:text-[14px] font-bold text-neutral-950">
+          Call 088568 65639
+        </span>
+        <span class="w-8 h-8 rounded-full blue-orb flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-105">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       STUDIO CONTROLS DRAWER (BUBBLE PALETTE SWITCHER, z-50)
+       ===================================================================== -->
+  <div id="drawer-scrim" class="fixed inset-0 bg-neutral-950/20 backdrop-blur-sm z-40"></div>
+
+  <aside id="studio-drawer" aria-label="Bubble Palette Controls"
+         class="fixed top-0 right-0 bottom-0 w-full sm:w-[420px] bg-white/95 backdrop-blur-xl border-l border-neutral-100 z-50 p-8 flex flex-col justify-between overflow-y-auto">
+    <div>
+      <!-- Header Row -->
+      <div class="flex items-center justify-between pb-6 border-b border-neutral-100">
+        <div class="flex items-center gap-2.5 text-neutral-950">
+          <svg class="w-4 h-4 text-[#0E2AC5]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="21" x2="14" y1="4" y2="4"></line>
+            <line x1="10" x2="3" y1="4" y2="4"></line>
+            <line x1="21" x2="12" y1="12" y2="12"></line>
+            <line x1="8" x2="3" y1="12" y2="12"></line>
+            <line x1="21" x2="16" y1="20" y2="20"></line>
+            <line x1="12" x2="3" y1="20" y2="20"></line>
+            <line x1="14" x2="14" y1="2" y2="6"></line>
+            <line x1="8" x2="8" y1="10" y2="14"></line>
+            <line x1="16" x2="16" y1="18" y2="22"></line>
+          </svg>
+          <span class="font-display font-black text-[14px] tracking-[0.2em] uppercase">
+            Bubble Colors
+          </span>
+        </div>
+        <button id="close-drawer-btn" type="button" aria-label="Close Controls"
+                class="w-9 h-9 rounded-full border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Italic Note -->
+      <p class="mt-5 font-mono text-[12px] italic text-neutral-400 leading-relaxed">
+        Pick the hero soap bubble colour erupting from the washing machine. As you scroll, the bubbles morph to volt-lime, then rose-pink as the heart assembles.
+      </p>
+
+      <!-- Section Title -->
+      <div class="mt-8 flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] font-bold uppercase text-neutral-900">
+        <svg class="w-3.5 h-3.5 text-[#0E2AC5]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+          <path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
+        </svg>
+        <span>Hero Bubble Palette</span>
+      </div>
+
+      <!-- 4 Selectable Theme Cards -->
+      <div id="palette-cards-container" class="mt-4 flex flex-col gap-3"></div>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="pt-6 border-t border-neutral-100 mt-8">
+      <div class="space-y-1.5 font-mono text-[9px] tracking-[0.16em] text-neutral-400 uppercase">
+        <div class="flex justify-between">
+          <span>RENDER ENGINE</span>
+          <span class="text-neutral-600 font-semibold">THREE.JS WEBGL</span>
+        </div>
+        <div class="flex justify-between">
+          <span>DYNAMICS SOLVER</span>
+          <span class="text-neutral-600 font-semibold">3D COLLISION VERLET</span>
+        </div>
+      </div>
+
+      <button id="reset-palette-btn" type="button"
+              class="mt-5 w-full py-3 px-4 rounded-xl border border-neutral-200 hover:border-neutral-900 text-neutral-800 hover:bg-neutral-950 hover:text-white transition-all flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-[0.15em]">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+          <path d="M3 3v5h5"/>
+        </svg>
+        <span>Reset Defaults</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- =====================================================================
+       MAIN SCROLL DOCUMENT (4 FULL-HEIGHT SECTIONS + FOOTER, z-10)
+       ===================================================================== -->
+  <main class="relative z-10">
+
+    <!-- -------------------------------------------------------------------
+         SECTION 01 — HERO (min-h-100svh, flex items-end)
+         Uncluttered center so the Washing Machine (#mc) is 100% visible!
+         Scrolling down erupts the 3D bubbles out of the spinning drum!
+         ------------------------------------------------------------------- -->
+    <section id="hero-section" class="min-h-[100svh] flex items-end px-4 sm:px-6 md:px-12 pb-6 md:pb-10 pt-24 pointer-events-none">
+      <div class="w-full flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+
+        <!-- Bottom-Left: Authentic Signboard Banner Strip -->
+        <div class="hero-anim-2 pointer-events-auto flex flex-col items-start gap-2.5">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-3.5 py-1 rounded-full bg-white/80 border border-white backdrop-blur-md font-mono text-[11px] font-bold text-neutral-900 shadow-sm">
+              4.2 ★ (45 Google Reviews) · Women-Owned Laundry
+            </span>
+            <span class="px-3.5 py-1 rounded-full bg-[#0E2AC5]/10 border border-[#0E2AC5]/25 backdrop-blur-md font-mono text-[11px] font-bold text-[#0E2AC5]">
+              Laxmi Chowk Rd, Hinjawadi Phase 1
+            </span>
+          </div>
+
+          <div class="inline-flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 px-5 py-3 rounded-2xl bg-[#1d295e]/95 text-white backdrop-blur-md border border-white/40 shadow-xl">
+            <span class="font-sans text-xs sm:text-sm font-bold tracking-wide text-white">
+              आमच्याकडे सर्व प्रकारचे कपडे धुवून व प्रेस करुन मिळेल.
+            </span>
+            <span class="hidden sm:inline text-amber-300">•</span>
+            <span class="font-raleway text-xs sm:text-sm font-bold italic text-amber-300">
+              All Types of Clothes Washed, Ironed &amp; Dry Cleaned
+            </span>
+          </div>
+        </div>
+
+        <!-- Bottom-Right: Interactive Scroll Cue to Erupt Bubbles from Washing Machine -->
+        <div class="hero-anim-3 pointer-events-auto flex items-center gap-3 self-start lg:self-end">
+          <a href="#section-drop" data-scroll-to="#section-drop"
+             class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white/75 hover:bg-white border border-white backdrop-blur-xl shadow-lg transition-all group">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#0E2AC5] animate-ping"></span>
+            <span class="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-neutral-900">
+              Scroll to release bubbles from machine
+            </span>
+            <svg class="w-4 h-4 text-[#0E2AC5] transition-transform group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------------
+         SECTION 02 — DROP / SERVICES, EXPRESS BADGE & STORE INFO BOX
+         (Moved down here as requested: Store Quick-Action Card + 2-3 Hr Express)
+         ------------------------------------------------------------------- -->
+    <section id="section-drop" class="min-h-[100svh] flex items-center pt-24 md:pt-32 pb-32 px-6 md:px-12 pointer-events-none">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <!-- Left (lg:col-span-6) -->
+        <div class="lg:col-span-6 pointer-events-auto">
+          <div class="reveal flex flex-wrap items-center gap-2.5">
+            <span class="font-mono text-[11px] tracking-[0.25em] uppercase text-[#0E2AC5]/80">
+              [ 02 — Services &amp; Heavy Fabric Care ]
+            </span>
+            <span class="px-3.5 py-1 rounded-full bg-[#e1306c]/15 border border-[#e1306c]/35 backdrop-blur-md font-sans text-xs font-extrabold text-[#c91c55] shadow-sm">
+              ⚡ 2–3 Hr Express Available
+            </span>
+          </div>
+
+          <h2 class="reveal font-raleway font-medium text-[2.6rem] leading-[1.0] sm:text-6xl md:text-[74px] md:leading-[0.94] tracking-tight text-neutral-950 mt-5"
+              style="transition-delay: 0.1s;">
+            Wash. Iron.<br />Dry clean.
+          </h2>
+
+          <p class="reveal mt-6 max-w-lg font-raleway text-[16px] md:text-[18px] leading-[1.55] text-neutral-700"
+             style="transition-delay: 0.18s;">
+            As you scroll, the bubbles erupt out of the washing machine drum and pour down like a rinse cycle. Whether you prefer <strong class="text-neutral-950 font-semibold">Per-Piece</strong> or <strong class="text-neutral-950 font-semibold">Per-Kg</strong> laundry, we handle everything from daily office shirts to heavy winter <strong class="text-neutral-950 font-semibold">Blankets, Razai (Quilts), Wedding Suits, and Silk Sarees</strong>.
+          </p>
+
+          <!-- Moved Down: Store Home Delivery & Quick Pickup Card -->
+          <div class="reveal mt-7 max-w-lg bg-white/55 backdrop-blur-xl p-6 rounded-3xl border border-white/85 stat-card-ring"
+               style="transition-delay: 0.24s;">
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="font-sans font-extrabold text-base signboard-marathi">स्टार लाँड्री ॲन्ड ड्रायक्लिनर्स</span>
+              <span class="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#0E2AC5] text-white font-bold">Home Delivery</span>
+            </div>
+
+            <p class="font-raleway text-[14.5px] font-medium leading-[1.45] text-neutral-800">
+              Washing, steam ironing &amp; dry cleaning at <strong class="text-neutral-950">Laxmi Chowk Rd, Phase 1, Hinjawadi</strong>. Flat <strong class="text-[#0E2AC5]">₹30 (1 km)</strong> &amp; <strong class="text-[#0E2AC5]">₹50 (2 km)</strong> delivery with <strong class="text-neutral-950">no minimum clothes!</strong>
+            </p>
+
+            <div class="mt-4 flex flex-wrap items-center gap-2.5">
+              <a href="tel:+918856865639"
+                 class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[#0E2AC5] hover:bg-[#091d8c] text-white text-xs font-bold transition-all shadow-sm">
+                <span>Call 088568 65639</span>
+              </a>
+              <a href="https://wa.me/918856865639?text=Hello%20Star%20Laundry%2C%20I%20want%20to%20schedule%20a%20laundry%20pickup%20in%20Hinjawadi."
+                 target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white hover:bg-neutral-50 border border-neutral-200 text-xs font-bold text-neutral-900 transition-all">
+                <span>WhatsApp Pickup</span>
+                <svg class="w-3.5 h-3.5 text-[#0E2AC5]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+              </a>
+            </div>
+
+            <div class="font-mono text-[10px] tracking-[0.15em] uppercase text-neutral-600 mt-4 pt-3 border-t border-neutral-900/10 flex items-center justify-between">
+              <span>Open All Days · 8 AM – 10 PM</span>
+              <span class="font-bold text-[#c91c55]">⚡ 2–3 Hr Express Available</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right (lg:col-span-6): Four Glass Service Cards -->
+        <div class="reveal lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5 pointer-events-auto"
+             style="transition-delay: 0.25s;">
+
+          <!-- Card 01: Everyday Wash & Fold -->
+          <div class="rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/85 via-white/35 to-white/15 stat-card-ring transition-transform duration-300 hover:-translate-y-0.5">
+            <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
+              <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">01 · Daily Wear</span>
+                <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+              </div>
+              <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">
+                Wash &amp; Fold / Wash &amp; Iron
+              </div>
+              <p class="mt-1 font-raleway text-[13px] leading-relaxed text-neutral-700">
+                Available both <strong>Per-Piece</strong> and <strong>Per-Kg</strong>. Shirts, trousers, t-shirts, jeans, kurtas, bedsheets &amp; pillow covers.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 02: Steam Ironing -->
+          <div class="rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/85 via-white/35 to-white/15 stat-card-ring transition-transform duration-300 hover:-translate-y-0.5">
+            <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
+              <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">02 · Crisp Press</span>
+                <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+              </div>
+              <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">
+                Professional Steam Ironing
+              </div>
+              <p class="mt-1 font-raleway text-[13px] leading-relaxed text-neutral-700">
+                Sharp, wrinkle-free pressing for IT park formals, cotton shirts, sarees, and urgent daily office wear.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 03: Heavy Items (Blanket, Razai) -->
+          <div class="rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/85 via-white/35 to-white/15 stat-card-ring transition-transform duration-300 hover:-translate-y-0.5">
+            <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
+              <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">03 · Heavy &amp; Winter</span>
+                <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+              </div>
+              <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">
+                Blanket, Razai &amp; Curtains
+              </div>
+              <p class="mt-1 font-raleway text-[13px] leading-relaxed text-neutral-700">
+                Deep hygienic washing &amp; dry cleaning for heavy <strong>Blankets (कंबल), Razai / Quilts (रजाई)</strong>, comforters &amp; curtains.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 04: Suits & Sarees Dry Clean -->
+          <div class="rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/85 via-white/35 to-white/15 stat-card-ring transition-transform duration-300 hover:-translate-y-0.5">
+            <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
+              <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">04 · Delicate Care</span>
+                <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+              </div>
+              <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">
+                Suit, Blazer &amp; Saree Dry Clean
+              </div>
+              <p class="mt-1 font-raleway text-[13px] leading-relaxed text-neutral-700">
+                Expert stain removal &amp; polishing for <strong>2/3-Piece Suits, Blazers, Sherwanis, Silk Sarees, Paithanis &amp; Lehengas</strong>.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------------
+         SECTION 03 — SHAPE / FLAT-RATE DELIVERY & 2–3 HR EXPRESS SERVICE
+         ------------------------------------------------------------------- -->
+    <section id="section-shape" class="min-h-[100svh] flex flex-col justify-between py-28 md:py-36 px-6 md:px-12 pointer-events-none">
+      <!-- Top -->
+      <div class="pointer-events-auto max-w-2xl">
+        <div class="reveal font-mono text-[11px] tracking-[0.25em] uppercase text-[#0E2AC5]/80">
+          [ 03 — Flat-Rate Pickup &amp; 2–3 Hr Express ]
+        </div>
+        <h2 class="reveal mt-5 font-raleway font-medium text-[2.6rem] leading-[1.0] sm:text-6xl md:text-[78px] md:leading-[0.92] tracking-tight text-neutral-950"
+            style="transition-delay: 0.1s;">
+          Pickup &amp; drop,<br />flat rate.
+        </h2>
+
+        <!-- 3 Highlight Cards for Delivery & Express -->
+        <div class="reveal mt-7 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-xl" style="transition-delay: 0.18s;">
+          <div class="rounded-2xl bg-white/45 backdrop-blur-xl border border-white/80 p-4 shadow-sm">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">Up to 1 KM</div>
+            <div class="mt-1 font-raleway text-2xl font-black text-neutral-950">₹30 Flat</div>
+            <div class="mt-0.5 font-raleway text-xs text-neutral-700">No minimum clothes required</div>
+          </div>
+          <div class="rounded-2xl bg-white/45 backdrop-blur-xl border border-white/80 p-4 shadow-sm">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-[#0E2AC5] font-bold">Up to 2 KM</div>
+            <div class="mt-1 font-raleway text-2xl font-black text-neutral-950">₹50 Flat</div>
+            <div class="mt-0.5 font-raleway text-xs text-neutral-700">Even 1–2 urgent pieces!</div>
+          </div>
+          <div class="rounded-2xl bg-[#e1306c]/15 backdrop-blur-xl border border-[#e1306c]/35 p-4 shadow-sm">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-[#b8184e] font-bold">Urgent Express</div>
+            <div class="mt-1 font-raleway text-2xl font-black text-neutral-950">2–3 Hours</div>
+            <div class="mt-0.5 font-raleway text-xs text-neutral-800">Call at 12 PM → Ready by 3 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom, Right-Aligned -->
+      <div class="self-end max-w-md text-left md:text-right pointer-events-auto mt-12 md:mt-0">
+        <p class="reveal font-raleway text-[15px] md:text-[18px] leading-[1.55] text-neutral-800 bg-white/35 backdrop-blur-xl p-5 rounded-3xl border border-white/70"
+           style="transition-delay: 0.2s;">
+          <strong class="text-neutral-950">No minimum piece condition!</strong> Whether you have a full week's load or just 1–2 emergency office outfits, we pick up and deliver across Laxmi Chowk &amp; Hinjawadi Phase 1. Need it urgently? Ask for our <strong class="text-[#c91c55]">2 to 3 Hour Express Service</strong>.
+        </p>
+
+        <div class="reveal mt-5 flex flex-wrap md:justify-end gap-2.5" style="transition-delay: 0.28s;">
+          <a href="tel:+918856865639"
+             class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-neutral-950 text-white hover:bg-[#0E2AC5] transition-colors font-raleway text-xs font-bold shadow-md">
+            <span>Call for 2–3 Hr Express Pickup</span>
+          </a>
+          <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/65 bg-white/45 backdrop-blur-md text-neutral-800">
+            <svg class="w-3.5 h-3.5 text-[#0E2AC5]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/>
+              <path d="m13 13 6 6"/>
+            </svg>
+            <span class="font-mono text-[10px] uppercase tracking-[0.18em]">Swipe through the heart</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------------
+         SECTION 04 — RELEASE / DIGITAL APP BILLING & ALL UPI PAYMENTS
+         ------------------------------------------------------------------- -->
+    <section id="section-release" class="min-h-[100svh] mx-auto flex flex-col items-center justify-center text-center py-28 md:py-36 px-6 md:px-12 max-w-4xl pointer-events-none">
+      <div class="pointer-events-auto">
+        <div class="reveal font-mono text-[11px] tracking-[0.25em] uppercase text-[#0E2AC5]/80">
+          [ 04 — Digital App Billing &amp; Easy Payments ]
+        </div>
+
+        <h2 class="reveal mt-6 font-raleway font-medium text-[2.8rem] leading-[1.0] sm:text-7xl md:text-[86px] md:leading-[0.92] tracking-tight text-neutral-950"
+            style="transition-delay: 0.12s;">
+          And then,<br />spotless.
+        </h2>
+
+        <p class="reveal mt-7 mx-auto max-w-xl font-raleway text-[16px] md:text-[19px] leading-[1.55] text-neutral-700"
+           style="transition-delay: 0.22s;">
+          Every order, cloth count, bill, and pending balance is managed digitally in our <strong class="text-neutral-950 font-semibold">Star Laundry Mobile App</strong> — giving you 100% transparent records. As the bubbles lift off into the lens, your fresh clothes are on their way!
+        </p>
+
+        <!-- Payment & App Feature Badges -->
+        <div class="reveal mt-8 flex flex-wrap items-center justify-center gap-2.5" style="transition-delay: 0.3s;">
+          <span class="px-4 py-2 rounded-full bg-white/60 border border-white/85 backdrop-blur-md font-raleway text-xs font-bold text-neutral-900 shadow-sm">
+            📱 Digital App Order &amp; Khata Tracking
+          </span>
+          <span class="px-4 py-2 rounded-full bg-white/60 border border-white/85 backdrop-blur-md font-raleway text-xs font-bold text-[#0E2AC5] shadow-sm">
+            💳 Google Pay (GPay) / PhonePe / Paytm / UPI
+          </span>
+          <span class="px-4 py-2 rounded-full bg-white/60 border border-white/85 backdrop-blur-md font-raleway text-xs font-bold text-neutral-900 shadow-sm">
+            💵 Cash &amp; Monthly Billing Available
+          </span>
+        </div>
+
+        <!-- Action Pills -->
+        <div class="reveal mt-9 flex flex-wrap items-center justify-center gap-3" style="transition-delay: 0.38s;">
+          <a href="tel:+918856865639"
+             class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-neutral-950 text-white font-raleway text-sm font-bold shadow-lg hover:bg-[#0E2AC5] transition-colors">
+            <span>Call Now: 088568 65639</span>
+          </a>
+          <a href="https://wa.me/918856865639?text=Hello%20Star%20Laundry%2C%20please%20schedule%20a%20pickup%20for%20my%20clothes."
+             target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 px-5 py-3.5 rounded-full border border-white/80 bg-white/55 backdrop-blur-md text-neutral-900 font-raleway text-sm font-bold hover:bg-white/85 transition-colors">
+            <span>Schedule Pickup on WhatsApp</span>
+            <svg class="w-4 h-4 text-[#0E2AC5]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================================
+       FOOTER (bg-neutral-950, rounded-t, z-10)
+       ===================================================================== -->
+  <footer id="site-footer" class="relative z-10 bg-neutral-950 text-white rounded-t-[2.5rem] md:rounded-t-[4rem] overflow-hidden">
+    <!-- Two soft blurred glow blooms -->
+    <div class="pointer-events-none absolute -top-32 -right-24 w-[28rem] h-[28rem] rounded-full blur-2xl"
+         style="background: radial-gradient(circle, #2f69ff66 0%, transparent 65%);"></div>
+    <div class="pointer-events-none absolute -bottom-40 -left-24 w-[32rem] h-[32rem] rounded-full blur-2xl"
+         style="background: radial-gradient(circle, #5175ff44 0%, transparent 65%);"></div>
+
+    <!-- Marquee Ticker at the Top -->
+    <div class="border-b border-white/10 py-5 overflow-hidden">
+      <div class="marquee-track font-raleway font-medium text-white/90" style="font-size: clamp(26px, 5.5vw, 58px);">
+        <!-- Repeat 1 -->
+        <div class="flex items-center">
+          <span class="px-8">Star Laundry &amp; Dry Cleaners</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="px-8">स्टार लाँड्री ॲन्ड ड्रायक्लिनर्स</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="px-8">₹30 (1 km) · ₹50 (2 km) Delivery</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="px-8">2–3 Hr Express Service</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="px-8">Blanket · Razai · Suit · Saree</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+        </div>
+        <!-- Repeat 2 (seamless loop) -->
+        <div class="flex items-center">
+          <span class="px-8">Star Laundry &amp; Dry Cleaners</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="px-8">स्टार लाँड्री ॲन्ड ड्रायक्लिनर्स</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="px-8">₹30 (1 km) · ₹50 (2 km) Delivery</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="px-8">2–3 Hr Express Service</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+          <span class="px-8">Blanket · Razai · Suit · Saree</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#2f69ff] inline-block"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Body -->
+    <div class="relative px-6 md:px-12 pt-16 md:pt-24 pb-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+        <!-- CTA (lg:col-span-5) -->
+        <div class="lg:col-span-5 footer-reveal">
+          <div class="font-mono text-[11px] tracking-[0.25em] uppercase text-white/40">
+            [ Star Laundry · Hinjawadi Phase 1 ]
+          </div>
+
+          <h3 class="mt-4 font-raleway font-medium text-4xl md:text-6xl leading-[0.95] text-white">
+            Have laundry<br />to pick up?
+          </h3>
+
+          <p class="mt-4 font-raleway text-sm text-white/65 max-w-md leading-relaxed">
+            आमच्याकडे सर्व प्रकारचे कपडे धुवून व प्रेस करुन मिळेल · Laxmi Chowk Rd, Phase 1, Rajiv Gandhi Infotech Park, Hinjawadi, Pune, Maharashtra 411057
+          </p>
+
+          <!-- Phone & WhatsApp Pill Links -->
+          <div class="mt-7 flex flex-wrap items-center gap-3">
+            <a href="tel:+918856865639"
+               class="group inline-flex items-center gap-4 pl-7 pr-2 py-2 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 transition-colors">
+              <span class="font-raleway font-semibold text-[16px] md:text-[18px] text-white">
+                088568 65639
+              </span>
+              <span class="w-10 h-10 rounded-full blue-orb flex items-center justify-center text-white">
+                <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+                </svg>
+              </span>
+            </a>
+
+            <a href="https://wa.me/918856865639?text=Hello%20Star%20Laundry%2C%20I%20would%20like%20to%20book%20a%20pickup."
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 font-raleway text-sm font-medium text-white/90 transition-colors">
+              <span>WhatsApp Pickup</span>
+              <svg class="w-4 h-4 text-[#5175ff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Link Columns (lg:col-span-7) -->
+        <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <!-- Column 1: Services & Heavy Items -->
+          <div class="footer-reveal" style="transition-delay: 0s;">
+            <div class="font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 mb-4">
+              Services &amp; Care
+            </div>
+            <ul class="space-y-3 font-raleway text-[14px] text-white/75">
+              <li><a href="#section-drop" data-scroll-to="#section-drop" class="hover:text-white transition-colors">Wash &amp; Iron (Per Piece / Kg)</a></li>
+              <li><a href="#section-drop" data-scroll-to="#section-drop" class="hover:text-white transition-colors">Blanket &amp; Razai Dry Clean</a></li>
+              <li><a href="#section-drop" data-scroll-to="#section-drop" class="hover:text-white transition-colors">Suit, Blazer &amp; Saree Care</a></li>
+              <li><a href="#section-shape" data-scroll-to="#section-shape" class="hover:text-white transition-colors">2–3 Hr Express Service</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 2: Delivery & Payments -->
+          <div class="footer-reveal" style="transition-delay: 0.08s;">
+            <div class="font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 mb-4">
+              Delivery &amp; Pay
+            </div>
+            <ul class="space-y-3 font-raleway text-[14px] text-white/75">
+              <li>₹30 Flat (Up to 1 km)</li>
+              <li>₹50 Flat (Up to 2 km)</li>
+              <li>No Minimum Clothes Limit</li>
+              <li>GPay · PhonePe · UPI · Cash</li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Store Location -->
+          <div class="footer-reveal" style="transition-delay: 0.16s;">
+            <div class="font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 mb-4">
+              Visit Store
+            </div>
+            <ul class="space-y-3 font-raleway text-[14px] text-white/75">
+              <li>
+                <a href="https://www.google.com/maps/search/?api=1&query=Star+Laundry+Laxmi+Chowk+Rd+Phase+1+Hinjawadi+Pune" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                  Laxmi Chowk Rd, Phase 1, Hinjawadi
+                </a>
+              </li>
+              <li>Open All Days: 8 AM – 10 PM</li>
+              <li>4.2 ★ Google Rating (45 Reviews)</li>
+              <li class="text-[#5175ff] font-medium">Women-Owned Business ♥</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar with Signboard Logo -->
+      <div class="mt-16 md:mt-24 pt-7 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="bg-white/95 px-3 py-1 rounded-xl">
+            <svg class="w-24 h-9"><use href="#star-laundry-logo" /></svg>
+          </div>
+          <span class="w-2 h-2 rounded-full bg-[#2f69ff]"></span>
+          <span class="font-mono text-[11px] text-white/50">
+            © 2026 Star Laundry &amp; Dry Cleaners — Laxmi Chowk Rd, Hinjawadi, Pune 411057.
+          </span>
+        </div>
+
+        <!-- Right: 3 Round Action Buttons -->
+        <div class="flex items-center gap-3">
+          <a href="tel:+918856865639" aria-label="Call Star Laundry"
+             class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:text-white hover:border-white/40 transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </a>
+          <a href="https://www.google.com/maps/search/?api=1&query=18.5995882,73.7311897" target="_blank" rel="noopener noreferrer" aria-label="Google Maps Location"
+             class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:text-white hover:border-white/40 transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/918856865639" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Star Laundry"
+             class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:text-white hover:border-white/40 transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       MAIN APPLICATION SCRIPT (ES MODULE: THREE.JS + WASHING DRUM BUBBLES)
+       ===================================================================== -->
+  <script type="module">
+    import * as THREE from 'three';
+
+    /* ---------------------------------------------------------------------
+       0. SPAWN 32 DOM SOAP BUBBLES EMERGING DIRECTLY FROM WASHING DRUM
+          + CUSTOM GOL SOAP BUBBLE CURSOR & MINI BUBBLE TRAIL
+       --------------------------------------------------------------------- */
+    const bubsContainer = document.getElementById('bubs');
+    for (let i = 0; i < 32; i++) {
+      const b = document.createElement('i');
+      b.className = 'bb';
+      const size = 10 + Math.random() * 28;
+      const duration = 2.4 + Math.random() * 3.0;
+      const delay = Math.random() * 4.5;
+      const angle = (Math.random() - 0.5) * Math.PI * 1.45;
+      const spreadX = Math.sin(angle) * (95 + Math.random() * 170);
+      const riseY = -(150 + Math.random() * 290);
+      b.style.cssText = `--s:${size.toFixed(1)}px; --d:${duration.toFixed(2)}s; --dl:${delay.toFixed(2)}s; --x:${spreadX.toFixed(0)}px; --y:${riseY.toFixed(0)}px;`;
+      bubsContainer.appendChild(b);
+    }
+
+    // Custom Gol Soap Bubble Cursor & Mini Bubble Trail
+    const bubbleCursor = document.getElementById('bubble-cursor');
+    const trailLayer = document.getElementById('bubble-trail-layer');
+    let cursorTargetX = -100, cursorTargetY = -100;
+    let cursorCurrentX = -100, cursorCurrentY = -100;
+    let lastTrailTime = 0;
+
+    const spawnTrailBubble = (x, y) => {
+      if (!trailLayer) return;
+      const tb = document.createElement('div');
+      tb.className = 'trail-bubble';
+      const sz = 7 + Math.random() * 12;
+      const dx = (Math.random() - 0.5) * 44;
+      const dy = -(24 + Math.random() * 48);
+      tb.style.width = `${sz}px`;
+      tb.style.height = `${sz}px`;
+      tb.style.setProperty('--tx0', `${x - sz / 2}px`);
+      tb.style.setProperty('--ty0', `${y - sz / 2}px`);
+      tb.style.setProperty('--tx1', `${x - sz / 2 + dx}px`);
+      tb.style.setProperty('--ty1', `${y - sz / 2 + dy}px`);
+      trailLayer.appendChild(tb);
+      setTimeout(() => tb.remove(), 720);
+    };
+
+    window.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      if (cursorCurrentX < 0) {
+        cursorCurrentX = e.clientX;
+        cursorCurrentY = e.clientY;
+      }
+      cursorTargetX = e.clientX;
+      cursorTargetY = e.clientY;
+      if (bubbleCursor) bubbleCursor.style.opacity = '1';
+
+      const now = performance.now();
+      if (now - lastTrailTime > 42) {
+        lastTrailTime = now;
+        spawnTrailBubble(e.clientX, e.clientY);
+      }
+
+      const interactive = e.target.closest('a, button, [role="button"]');
+      if (bubbleCursor) {
+        bubbleCursor.classList.toggle('is-hovering', !!interactive);
+      }
+    });
+
+    window.addEventListener('mousedown', () => {
+      if (bubbleCursor) bubbleCursor.classList.add('is-down');
+    });
+    window.addEventListener('mouseup', () => {
+      if (bubbleCursor) bubbleCursor.classList.remove('is-down');
+    });
+
+    const animateBubbleCursor = () => {
+      cursorCurrentX += (cursorTargetX - cursorCurrentX) * 0.28;
+      cursorCurrentY += (cursorTargetY - cursorCurrentY) * 0.28;
+      if (bubbleCursor && cursorCurrentX >= 0) {
+        bubbleCursor.style.transform = `translate3d(${cursorCurrentX.toFixed(1)}px, ${cursorCurrentY.toFixed(1)}px, 0)`;
+      }
+      requestAnimationFrame(animateBubbleCursor);
+    };
+    requestAnimationFrame(animateBubbleCursor);
+
+    /* ---------------------------------------------------------------------
+       1. GLOBAL STATE & STUDIO CONTROLS PRESETS
+       --------------------------------------------------------------------- */
+    const PALETTE_PRESETS = [
+      {
+        id: 'roseGold',
+        name: 'Royal Blue & Pearl',
+        description: 'Hyper-distinct cobalt spheres floating in soft white-slate gradients.',
+        primaryColor: '#2F69FF',
+        ballColor: '#2F69FF',
+        heroGradient: 'radial-gradient(circle at center, #ffffff 0%, #ecefff 35%, #c2d1ff 100%)',
+      },
+      {
+        id: 'pinkBlush',
+        name: 'Rose Blush & Crème',
+        description: 'Sweet candy pinks and juicy strawberry accents in a pearl studio.',
+        primaryColor: '#FFA6B3',
+        ballColor: '#FFC5C2',
+        heroGradient: 'radial-gradient(circle at center, #ffffff 0%, #fff0f1 38%, #ffd1d5 100%)',
+      },
+      {
+        id: 'voltLime',
+        name: 'Volt Lime & Slate',
+        description: 'Electric neon volt-lime against a clean white-slate horizon.',
+        primaryColor: '#E1FC03',
+        ballColor: '#E1FC03',
+        heroGradient: 'radial-gradient(circle at center, #ffffff 0%, #fbffe5 38%, #e8ff9c 100%)',
+      },
+      {
+        id: 'arcticBlue',
+        name: 'Arctic Sky & Crystal',
+        description: 'Cool arctic crystal blues with a translucent glass sheen.',
+        primaryColor: '#96E5FF',
+        ballColor: '#96E5FF',
+        heroGradient: 'radial-gradient(circle at center, #ffffff 0%, #f0f9ff 38%, #bae6fd 100%)',
+      }
+    ];
+
+    let selectedThemeId = 'roseGold';
+    let currentBallColor = '#2F69FF';
+
+    // Physics / Scroll Control state
+    const control = {
+      progress: 0,
+      started: false,
+    };
+
+    // Normalized cursor state (starts offscreen)
+    const mousePos = { x: 99, y: 99, isDown: false };
+    window.addEventListener('pointermove', (e) => {
+      mousePos.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mousePos.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+    window.addEventListener('mousedown', () => { mousePos.isDown = true; });
+    window.addEventListener('mouseup', () => { mousePos.isDown = false; });
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) {
+        mousePos.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+        mousePos.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+      }
+    }, { passive: true });
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        mousePos.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+        mousePos.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+      }
+    }, { passive: true });
+
+    /* ---------------------------------------------------------------------
+       2. LENIS-STYLE VANILLA SMOOTH SCROLL + WASHING MACHINE FADE DRIVER
+       --------------------------------------------------------------------- */
+    const bgLayer0 = document.getElementById('bg-layer-0');
+    const bgLayer1 = document.getElementById('bg-layer-1');
+    const bgLayer2 = document.getElementById('bg-layer-2');
+    const machineContainer = document.getElementById('mc');
+    let currentBgStage = -1;
+
+    const updateScrollProgress = () => {
+      const vh = window.innerHeight || 1;
+      const progress = window.scrollY / vh;
+      control.progress = progress;
+
+      // Keep the washing machine prominent while bubbles erupt out of its drum (progress 0 -> 0.85)
+      if (machineContainer) {
+        const mcOpacity = Math.max(0, 1 - Math.max(0, progress - 0.12) / 0.78);
+        const mcScale = 1 + Math.min(0.08, progress * 0.12) - Math.max(0, progress - 0.35) * 0.25;
+        machineContainer.style.opacity = String(mcOpacity);
+        machineContainer.style.transform = `translate(-50%, -48%) scale(${mcScale.toFixed(3)})`;
+      }
+
+      const stage = progress > 1.55 ? 2 : progress > 0.7 ? 1 : 0;
+      if (stage !== currentBgStage) {
+        currentBgStage = stage;
+        bgLayer0.style.opacity = stage === 0 ? '1' : '0';
+        bgLayer1.style.opacity = stage === 1 ? '1' : '0';
+        bgLayer2.style.opacity = stage === 2 ? '1' : '0';
+      }
+    };
+
+    let targetScrollY = window.scrollY;
+    let currentScrollY = window.scrollY;
+    let isSmoothScrolling = false;
+    const LERP_FACTOR = 0.09;
+    const WHEEL_MULTIPLIER = 1;
+
+    const getMaxScroll = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+
+    window.addEventListener('wheel', (e) => {
+      if (e.ctrlKey || e.target.closest('#studio-drawer')) return;
+      e.preventDefault();
+      if (!isSmoothScrolling) {
+        targetScrollY = window.scrollY;
+        currentScrollY = window.scrollY;
+        isSmoothScrolling = true;
+      }
+      targetScrollY = Math.max(0, Math.min(getMaxScroll(), targetScrollY + e.deltaY * WHEEL_MULTIPLIER));
+    }, { passive: false });
+
+    window.addEventListener('scroll', () => {
+      if (!isSmoothScrolling) {
+        targetScrollY = window.scrollY;
+        currentScrollY = window.scrollY;
+      }
+      updateScrollProgress();
+    }, { passive: true });
+
+    window.addEventListener('resize', updateScrollProgress);
+
+    document.querySelectorAll('[data-scroll-to]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const selector = link.getAttribute('data-scroll-to');
+        const targetEl = document.querySelector(selector);
+        if (targetEl) {
+          e.preventDefault();
+          const top = targetEl.getBoundingClientRect().top + window.scrollY;
+          targetScrollY = Math.max(0, Math.min(getMaxScroll(), top));
+          isSmoothScrolling = true;
+        }
+      });
+    });
+
+    const smoothScrollTick = () => {
+      if (isSmoothScrolling) {
+        currentScrollY += (targetScrollY - currentScrollY) * LERP_FACTOR;
+        if (Math.abs(targetScrollY - currentScrollY) < 0.35) {
+          currentScrollY = targetScrollY;
+          isSmoothScrolling = false;
+        }
+        window.scrollTo(0, currentScrollY);
+        updateScrollProgress();
+      }
+      requestAnimationFrame(smoothScrollTick);
+    };
+    requestAnimationFrame(smoothScrollTick);
+    updateScrollProgress();
+
+    /* ---------------------------------------------------------------------
+       3. PRE-ROLL LOADER LOGIC (Eases to 92%, then 100% once WebGL is ready)
+       --------------------------------------------------------------------- */
+    let webglReady = false;
+    let loaderDone = false;
+    let loaderValue = 0;
+    let loaderLeavingScheduled = false;
+
+    const preloaderEl = document.getElementById('preloader');
+    const loaderStatusEl = document.getElementById('loader-status');
+    const loaderBarEl = document.getElementById('loader-bar');
+    const loaderCounterEl = document.getElementById('loader-counter');
+    const loaderItems = preloaderEl.querySelectorAll('.loader-item');
+
+    loaderItems.forEach((item, idx) => {
+      setTimeout(() => {
+        item.classList.add('in');
+      }, 90 + idx * 140);
+    });
+
+    const onReady = () => {
+      webglReady = true;
+    };
+
+    const onDone = () => {
+      if (loaderDone) return;
+      loaderDone = true;
+      control.started = true;
+      document.body.classList.add('scene-started');
+      preloaderEl.style.display = 'none';
+    };
+
+    let lastLoaderTime = performance.now();
+    const tickLoader = (now) => {
+      if (loaderDone) return;
+      const dt = Math.min(0.05, Math.max(0.001, (now - lastLoaderTime) / 1000));
+      lastLoaderTime = now;
+
+      if (!webglReady) {
+        loaderValue += (92 - loaderValue) * 1.7 * dt;
+      } else {
+        loaderValue += (100 - loaderValue) * 6 * dt;
+        if (loaderValue >= 99.4) loaderValue = 100;
+      }
+
+      const displayInt = Math.min(100, Math.floor(loaderValue));
+      loaderBarEl.style.width = `${loaderValue}%`;
+      loaderCounterEl.textContent = `${String(displayInt).padStart(3, '0')}%`;
+
+      if (displayInt >= 100) {
+        loaderStatusEl.textContent = 'Releasing fresh bubbles';
+      }
+
+      if (loaderValue >= 99.9 && webglReady && !loaderLeavingScheduled) {
+        loaderLeavingScheduled = true;
+        setTimeout(() => {
+          preloaderEl.style.opacity = '0';
+          preloaderEl.style.pointerEvents = 'none';
+        }, 140);
+        setTimeout(() => {
+          onDone();
+        }, 140 + 520);
+      } else {
+        requestAnimationFrame(tickLoader);
+      }
+    };
+    requestAnimationFrame(tickLoader);
+
+    /* ---------------------------------------------------------------------
+       4. THREE.JS WEBGL SCENE — BUBBLES ERUPT FROM WASHING MACHINE DRUM
+       --------------------------------------------------------------------- */
+    const container = document.getElementById('canvas-container');
+    let currentSceneCleanup = null;
+
+    const buildGravityScene = (ballColor) => {
+      if (currentSceneCleanup) {
+        currentSceneCleanup();
+        currentSceneCleanup = null;
+      }
+
+      const canvas = document.getElementById('gravity-canvas');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 100);
+      camera.position.set(0, 0, 11);
+
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance'
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.15;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+      const hemiLight = new THREE.HemisphereLight(0xffffff, new THREE.Color(ballColor), 1.6);
+      scene.add(hemiLight);
+
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.4);
+      keyLight.position.set(-6, 10, 8);
+      keyLight.castShadow = true;
+      keyLight.shadow.mapSize.width = 2048;
+      keyLight.shadow.mapSize.height = 2048;
+      keyLight.shadow.camera.near = 0.5;
+      keyLight.shadow.camera.far = 30;
+      keyLight.shadow.camera.left = -8;
+      keyLight.shadow.camera.right = 8;
+      keyLight.shadow.camera.top = 8;
+      keyLight.shadow.camera.bottom = -8;
+      keyLight.shadow.bias = -0.0003;
+      keyLight.shadow.radius = 12.0;
+      scene.add(keyLight);
+
+      const rimLight = new THREE.DirectionalLight(0xffffff, 1.25);
+      rimLight.position.set(8, 7, -8);
+      scene.add(rimLight);
+
+      const frontLight = new THREE.DirectionalLight(0xffffff, 0.4);
+      frontLight.position.set(0, 0, 11);
+      scene.add(frontLight);
+
+      const sideBounceLight = new THREE.DirectionalLight(0xffffff, 0.3);
+      sideBounceLight.position.set(-9, -2, 4);
+      scene.add(sideBounceLight);
+
+      let viewportWidth = 10;
+      let viewportHeight = 6;
+      const updateFrustumBounds = () => {
+        const fovRad = THREE.MathUtils.degToRad(camera.fov);
+        viewportHeight = 2 * Math.tan(fovRad / 2) * camera.position.z;
+        viewportWidth = viewportHeight * (container.clientWidth / container.clientHeight);
+      };
+      updateFrustumBounds();
+
+      const isMobile = window.innerWidth < 768;
+      const ballCount = isMobile ? 54 : 96;
+
+      const getDynamicColors = (baseColor) => {
+        const hex = baseColor.toLowerCase();
+        if (hex === '#e1fc03') {
+          return {
+            pastel: new THREE.Color('#FBFFE2'),
+            light: new THREE.Color('#EFFE69'),
+            medium: new THREE.Color('#E1FC03'),
+            deep: new THREE.Color('#B1E200'),
+            glass: new THREE.Color('#DCFF32')
+          };
+        } else if (hex === '#ffc5c2' || hex === '#ffa19e') {
+          return {
+            pastel: new THREE.Color('#FFF5F4'),
+            light: new THREE.Color('#FFECEB'),
+            medium: new THREE.Color('#FFA6B3'),
+            deep: new THREE.Color('#FF4D6D'),
+            glass: new THREE.Color('#FFA6B3')
+          };
+        } else if (hex === '#96e5ff') {
+          return {
+            pastel: new THREE.Color('#F0F9FF'),
+            light: new THREE.Color('#C9F1FF'),
+            medium: new THREE.Color('#96E5FF'),
+            deep: new THREE.Color('#2BA5FF'),
+            glass: new THREE.Color('#98E4FF')
+          };
+        } else if (hex === '#2f69ff') {
+          return {
+            pastel: new THREE.Color('#ECEFFF'),
+            light: new THREE.Color('#A8C1FF'),
+            medium: new THREE.Color('#2F69FF'),
+            deep: new THREE.Color('#0A33BF'),
+            glass: new THREE.Color('#4D80FF')
+          };
+        }
+        const c = new THREE.Color(baseColor);
+        return {
+          pastel: c.clone().offsetHSL(0, -0.15, 0.25),
+          light: c.clone().offsetHSL(0, -0.05, 0.12),
+          medium: c.clone(),
+          deep: c.clone().offsetHSL(0.01, 0.1, -0.12),
+          glass: c.clone()
+        };
+      };
+
+      const palette = getDynamicColors(ballColor);
+      const isBlack = false;
+
+      const palHero = palette;
+      const palLime = getDynamicColors('#E1FC03');
+      const palPink = getDynamicColors('#FFC5C2');
+      const ROLES = ['pastel', 'light', 'medium', 'deep', 'glass'];
+      const curPal = {
+        pastel: new THREE.Color(),
+        light: new THREE.Color(),
+        medium: new THREE.Color(),
+        deep: new THREE.Color(),
+        glass: new THREE.Color()
+      };
+
+      const sphereGeometry = new THREE.SphereGeometry(1, 48, 48);
+      const balls = [];
+      for (let i = 0; i < ballCount; i++) {
+        let radius = 0.33;
+        const rand = Math.random();
+        if (rand < 0.3) radius = 0.27 + Math.random() * 0.12;
+        else if (rand < 0.8) radius = 0.42 + Math.random() * 0.18;
+        else radius = 0.66 + Math.random() * 0.21;
+
+        const mass = Math.pow(radius, 3);
+
+        let chosenColor = palette.medium;
+        let color = palette.medium;
+        let sphereMat;
+        let role = 'medium';
+
+        const isGlass = Math.random() < 0.22 && !isBlack;
+
+        if (isGlass) {
+          sphereMat = new THREE.MeshPhysicalMaterial({
+            color: palette.glass,
+            roughness: 0.08,
+            metalness: 0.0,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.03,
+            transmission: 0.95,
+            ior: 1.485,
+            thickness: 2.2,
+            specularColor: new THREE.Color('#ffffff'),
+            specularIntensity: 1.0,
+            attenuationColor: palette.pastel,
+            attenuationDistance: 1.0,
+            emissive: palette.glass,
+            emissiveIntensity: 0.12,
+            transparent: true,
+          });
+          color = palette.glass;
+          role = 'glass';
+        } else {
+          const colorRand = Math.random();
+          if (colorRand < 0.25) { chosenColor = palette.pastel; role = 'pastel'; }
+          else if (colorRand < 0.55) { chosenColor = palette.light; role = 'light'; }
+          else if (colorRand < 0.85) { chosenColor = palette.medium; role = 'medium'; }
+          else { chosenColor = palette.deep; role = 'deep'; }
+
+          sphereMat = new THREE.MeshPhysicalMaterial({
+            color: chosenColor,
+            roughness: 0.44,
+            metalness: 0.0,
+            clearcoat: 0.24,
+            clearcoatRoughness: 0.35,
+            emissive: chosenColor,
+            emissiveIntensity: 0.08,
+            transparent: true,
+          });
+          color = chosenColor;
+        }
+
+        const group = new THREE.Group();
+        const sphereMesh = new THREE.Mesh(sphereGeometry, sphereMat);
+        sphereMesh.scale.setScalar(radius);
+        sphereMesh.castShadow = true;
+        sphereMesh.receiveShadow = true;
+        group.add(sphereMesh);
+        scene.add(group);
+
+        balls.push({
+          id: i,
+          radius,
+          mass,
+          position: new THREE.Vector3(0, 0, 0),
+          velocity: new THREE.Vector3(),
+          meshGroup: group,
+          sphere: sphereMesh,
+          material: sphereMat,
+          role,
+          isGlass,
+          visualScale: radius,
+          color,
+          restPosition: new THREE.Vector3(0, 0, 0),
+          shapeTarget: new THREE.Vector3(),
+        });
+      }
+
+      const meanRadius = balls.reduce((sum, b) => sum + b.radius, 0) / balls.length;
+      let shapeScale = 1;
+
+      const inHeart = (x, y) => {
+        const a = x * x + y * y - 1;
+        return a * a * a - x * x * y * y * y <= 0;
+      };
+      const assignHeartTargets = () => {
+        const S = Math.min(viewportWidth * 0.30, viewportHeight * 0.27);
+        const baseCY = -viewportHeight * 0.03;
+        shapeScale = Math.max(0.3, Math.min(1, (S * 0.45 / 2.3) / meanRadius));
+        for (let i = 0; i < balls.length; i++) {
+          let x = 0, y = 0, tries = 0;
+          do {
+            x = (Math.random() * 2 - 1) * 1.25;
+            y = Math.random() * 2.55 - 1.4;
+            tries++;
+          } while (!inHeart(x, y) && tries < 60);
+          balls[i].shapeTarget.set(x * S, (y + 0.12) * S + baseCY, (Math.random() - 0.5) * 0.35);
+        }
+      };
+      assignHeartTargets();
+
+      /* -------------------------------------------------------------------
+         WASHING MACHINE DRUM CONTAINMENT & SCROLL-DRIVEN BUBBLE ERUPTION!
+         At scroll = 0, spheres churn INSIDE the circular washing machine
+         porthole drum (0, -0.22, 0) at compact scale so the machine is 100%
+         visible. As the user scrolls down, the drum erupts and bubbles pour
+         out of the washing machine across the entire screen!
+         ------------------------------------------------------------------- */
+      const DRUM_CENTER_Y = -0.22;
+      const scatterFar = (withDrumSpinVelocity) => {
+        for (let i = 0; i < balls.length; i++) {
+          const b = balls[i];
+          const a = (i / balls.length) * Math.PI * 2 + Math.random() * 0.5;
+          // First 10 balls float gently around the outer rim of the drum door;
+          // the remaining balls churn inside the circular glass drum window
+          const isOuterFloater = i < 10;
+          const r = isOuterFloater ? (1.05 + Math.random() * 0.45) : (0.12 + Math.random() * 0.72);
+          b.position.set(
+            Math.cos(a) * r,
+            DRUM_CENTER_Y + Math.sin(a) * r,
+            (Math.random() - 0.5) * 0.35
+          );
+          b.meshGroup.position.copy(b.position);
+          b.visualScale = b.radius * (isOuterFloater ? 0.42 : 0.32);
+          b.sphere.scale.setScalar(b.visualScale);
+
+          if (withDrumSpinVelocity) {
+            // Tangential spin velocity inside the drum
+            const spinSpeed = 0.025 + Math.random() * 0.02;
+            b.velocity.set(
+              -Math.sin(a) * spinSpeed,
+              Math.cos(a) * spinSpeed,
+              (Math.random() - 0.5) * 0.01
+            );
+          } else {
+            b.velocity.set(0, 0, 0);
+          }
+        }
+      };
+      scatterFar(false);
+
+      const params = {
+        gravity: 0,
+        rebound: -0.3,
+        mouseRepelForce: 0.05,
+        mouseRepelRadius: 4.4,
+        damping: 0.91,
+        centerAttractForce: 0.0035,
+        bounciness: 0.02,
+      };
+
+      const mouseProjVec = new THREE.Vector3();
+      const mouseWorld3D = new THREE.Vector3();
+      const updateMouse3D = () => {
+        if (!mousePos) return;
+        mouseProjVec.set(mousePos.x, mousePos.y, 0.5);
+        mouseProjVec.unproject(camera);
+        const dir = mouseProjVec.sub(camera.position).normalize();
+        const distance = -camera.position.z / dir.z;
+        mouseWorld3D.copy(camera.position).add(dir.multiplyScalar(distance));
+      };
+
+      const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+      const smoothstep = (a, b, x) => {
+        const t = clamp01((x - a) / (b - a));
+        return t * t * (3 - 2 * t);
+      };
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+      let animationFrameId = 0;
+      const clock = new THREE.Clock();
+      let localStarted = false;
+      let entranceStart = 0;
+      let reportedReady = false;
+      let prevEruptF = 0;
+
+      const diffVec = new THREE.Vector3();
+      const collideDiff = new THREE.Vector3();
+      const relVel = new THREE.Vector3();
+      const deltaPos = new THREE.Vector3();
+      const rotAxis = new THREE.Vector3();
+      const prevMouseWorld = new THREE.Vector3();
+      let mouseSpeed = 0;
+
+      const simulateAndRender = () => {
+        animationFrameId = requestAnimationFrame(simulateAndRender);
+
+        const time = clock.getElapsedTime();
+        clock.getDelta();
+        updateMouse3D();
+
+        const ctrl = control;
+
+        if (ctrl?.started && !localStarted) {
+          localStarted = true;
+          entranceStart = time;
+          scatterFar(true);
+        }
+
+        if (!localStarted) {
+          renderer.render(scene, camera);
+          if (!reportedReady) {
+            reportedReady = true;
+            onReady();
+          }
+          return;
+        }
+
+        const progress = ctrl?.progress ?? 0;
+
+        // Mode blend factors:
+        // drumF = 1 at top of page (spheres spin inside washing machine drum)
+        // eruptF = rises from scroll 0.03 -> 0.55 (bubbles burst out of the washing machine drum!)
+        const drumF = 1 - smoothstep(0.03, 0.42, progress);
+        const eruptF = smoothstep(0.03, 0.55, progress) * (1 - smoothstep(0.85, 1.25, progress));
+        const eruptDelta = Math.max(0, eruptF - prevEruptF);
+        prevEruptF = eruptF;
+
+        const dropRaw = smoothstep(0.18, 0.90, progress);
+        const flyF = smoothstep(2.7, 3.45, progress);
+        const shapeF = smoothstep(1.40, 2.05, progress) * (1 - smoothstep(2.55, 3.0, progress));
+        const dropF = dropRaw * (1 - smoothstep(1.25, 1.75, progress));
+
+        // Scroll-driven palette morph: hero -> volt-lime -> rose-pink
+        const bLime = smoothstep(0.55, 1.05, progress);
+        const bPink = smoothstep(1.40, 1.95, progress);
+        for (const role of ROLES) {
+          curPal[role].copy(palHero[role]).lerp(palLime[role], bLime).lerp(palPink[role], bPink);
+        }
+        hemiLight.groundColor.copy(curPal.medium);
+
+        const isMouseInteracting = !!mousePos &&
+          (Math.abs(mousePos.x) < 0.99 || Math.abs(mousePos.y) < 0.99);
+
+        mouseSpeed = isMouseInteracting ? mouseWorld3D.distanceTo(prevMouseWorld) : 0;
+        if (mouseSpeed > 3) mouseSpeed = 3;
+        prevMouseWorld.copy(mouseWorld3D);
+
+        let damping = 0.91;
+        damping = lerp(damping, 0.99, dropF);
+        damping = lerp(damping, 0.90, shapeF);
+        damping = lerp(damping, 0.985, flyF);
+
+        const camZ = camera.position.z;
+
+        // 1. ACCELERATIONS
+        for (let i = 0; i < balls.length; i++) {
+          const b = balls[i];
+          const isOuterFloater = i < 10;
+
+          // While in Hero (drumF > 0), spin spheres inside the circular washing machine drum porthole!
+          if (drumF > 0.01) {
+            const dx = b.position.x;
+            const dy = b.position.y - DRUM_CENTER_Y;
+            const distFromDrum = Math.sqrt(dx * dx + dy * dy) || 0.001;
+            const targetDrumRad = isOuterFloater ? 1.25 : 0.58;
+
+            // Pull toward circular drum ring + vortex tangential spin
+            const radialPull = (targetDrumRad - distFromDrum) * 0.032 * drumF;
+            b.velocity.x += (dx / distFromDrum) * radialPull;
+            b.velocity.y += (dy / distFromDrum) * radialPull;
+
+            // Vortex spin inside washing machine drum
+            const swirl = (isOuterFloater ? 0.0022 : 0.0055) * drumF;
+            b.velocity.x += (-dy / distFromDrum) * swirl;
+            b.velocity.y += (dx / distFromDrum) * swirl;
+            b.velocity.z += (0 - b.position.z) * 0.04 * drumF;
+          }
+
+          // As user scrolls down, erupt bubbles outward from the washing machine drum!
+          if (eruptDelta > 0.0001 || eruptF > 0.01) {
+            const outAngle = (b.id * 2.39996) + time * 0.6;
+            const burstMag = (eruptDelta * 1.45) + (eruptF * 0.0085 * (1 - dropF * 0.6));
+            b.velocity.x += Math.cos(outAngle) * burstMag * 1.35;
+            b.velocity.y += (Math.sin(outAngle) * 0.65 + 0.25) * burstMag;
+            b.velocity.z += Math.sin(b.id) * burstMag * 0.35;
+          }
+
+          if (dropF > 0.001) {
+            b.velocity.y -= 0.0115 * dropF;
+          }
+
+          if (shapeF > 0.001) {
+            const k = 0.06 * shapeF;
+            b.velocity.x += (b.shapeTarget.x - b.position.x) * k;
+            b.velocity.y += (b.shapeTarget.y - b.position.y) * k;
+            b.velocity.z += (b.shapeTarget.z - b.position.z) * k;
+          }
+
+          if (flyF > 0.001) {
+            const stagger = (b.id * 0.6180339887) % 1;
+            const local = smoothstep(stagger * 0.55, stagger * 0.55 + 0.45, flyF);
+            b.velocity.z += 0.05 * local;
+            b.velocity.x += b.position.x * 0.006 * local;
+            b.velocity.y += b.position.y * 0.006 * local;
+          }
+
+          if (mousePos && isMouseInteracting) {
+            diffVec.subVectors(b.position, mouseWorld3D);
+            const rawDist = diffVec.length();
+            const down = mousePos.isDown;
+            const activeRepelRadius = down ? params.mouseRepelRadius * 1.4 : params.mouseRepelRadius;
+            const activeRepelForce = down ? params.mouseRepelForce * 1.7 : params.mouseRepelForce;
+            if (rawDist < activeRepelRadius && rawDist > 0.0001) {
+              const ratio = rawDist / activeRepelRadius;
+              const smoothFactor = 1.0 - (ratio * ratio * (3.0 - 2.0 * ratio));
+              const speedBoost = 1 + mouseSpeed * 3.2;
+              const push = smoothFactor * activeRepelForce * speedBoost;
+              diffVec.normalize();
+              diffVec.z *= 0.12;
+              diffVec.normalize();
+              b.velocity.addScaledVector(diffVec, push);
+            }
+          }
+
+          b.velocity.multiplyScalar(damping);
+          b.position.addScaledVector(b.velocity, 1);
+
+          const c = b.isGlass ? curPal.glass : curPal[b.role];
+          b.material.color.copy(c);
+          if (!isBlack) b.material.emissive.copy(c);
+
+          b.material.opacity = flyF > 0.001
+            ? 1 - smoothstep(camZ - 2.6, camZ - 0.3, b.position.z)
+            : 1;
+
+          // Scale spheres small inside the drum at scroll=0, then expand to full size as they erupt out on scroll!
+          const drumScaleFactor = isOuterFloater ? 0.45 : 0.32;
+          const baseVis = b.radius * lerp(1.0, drumScaleFactor, drumF);
+          const targetVis = baseVis * (1 - (1 - shapeScale) * shapeF);
+          b.visualScale += (targetVis - b.visualScale) * 0.14;
+          b.sphere.scale.setScalar(b.visualScale);
+        }
+
+        // 2. PAIRWISE COLLISIONS
+        const collideScale = 0.28 * (1 - 0.65 * drumF) * (1 - 0.93 * shapeF) * (1 - flyF);
+        const subSteps = 4;
+        for (let step = 0; step < subSteps; step++) {
+          for (let i = 0; i < balls.length; i++) {
+            for (let j = i + 1; j < balls.length; j++) {
+              const b1 = balls[i];
+              const b2 = balls[j];
+              collideDiff.subVectors(b2.position, b1.position);
+              const dist = collideDiff.length();
+              const minDist = b1.visualScale + b2.visualScale;
+              if (dist < minDist && dist > 0.001) {
+                const overlap = minDist - dist;
+                collideDiff.multiplyScalar(1 / dist);
+                const totalMass = b1.mass + b2.mass;
+                const ratio1 = b2.mass / totalMass;
+                const ratio2 = b1.mass / totalMass;
+                b1.position.addScaledVector(collideDiff, -overlap * ratio1 * collideScale);
+                b2.position.addScaledVector(collideDiff, overlap * ratio2 * collideScale);
+
+                relVel.subVectors(b2.velocity, b1.velocity);
+                const velAlongNormal = relVel.dot(collideDiff);
+                if (velAlongNormal < -0.0001) {
+                  const impulse = -(1 + params.bounciness) * velAlongNormal / (1 / b1.mass + 1 / b2.mass);
+                  b1.velocity.addScaledVector(collideDiff, -impulse / b1.mass);
+                  b2.velocity.addScaledVector(collideDiff, impulse / b2.mass);
+                }
+              }
+            }
+          }
+        }
+
+        // 3. VIEWPORT WALLS + BOUNCY FLOOR
+        const borderPad = 0.2;
+        const xBound = viewportWidth / 2 - borderPad;
+        const topY = viewportHeight / 2 - 0.05;
+        const floorY = -viewportHeight / 2 + 0.05;
+        const zBound = 2.0;
+        const restitution = 0.30 + 0.35 * dropF;
+
+        const contain = flyF < 0.5;
+        const zContain = flyF < 0.02;
+
+        for (let i = 0; i < balls.length; i++) {
+          const b = balls[i];
+          const r = b.visualScale;
+
+          if (contain) {
+            if (b.position.x < -xBound - r) { b.position.x = -xBound - r; b.velocity.x *= params.rebound; }
+            else if (b.position.x > xBound + r) { b.position.x = xBound + r; b.velocity.x *= params.rebound; }
+
+            if (b.position.y - r < floorY) {
+              b.position.y = floorY + r;
+              if (b.velocity.y < 0) b.velocity.y = -b.velocity.y * restitution;
+              if (dropF > 0.3) { b.velocity.x *= 0.86; b.velocity.z *= 0.86; }
+            }
+            if (b.position.y + r > topY) {
+              b.position.y = topY - r;
+              if (b.velocity.y > 0) b.velocity.y *= params.rebound;
+            }
+          }
+
+          if (zContain) {
+            if (b.position.z < -zBound) { b.position.z = -zBound; b.velocity.z *= params.rebound; }
+            else if (b.position.z > zBound) { b.position.z = zBound; b.velocity.z *= params.rebound; }
+          }
+
+          deltaPos.copy(b.position).sub(b.meshGroup.position);
+          if (deltaPos.lengthSq() > 0.000001) {
+            rotAxis.set(deltaPos.y, -deltaPos.x, 0).normalize();
+            const rotAngle = (deltaPos.length() / b.radius) * 0.95;
+            b.meshGroup.rotateOnWorldAxis(rotAxis, rotAngle);
+          }
+          b.meshGroup.position.copy(b.position);
+        }
+
+        renderer.render(scene, camera);
+        if (!reportedReady) {
+          reportedReady = true;
+          onReady();
+        }
+      };
+
+      simulateAndRender();
+
+      const handleResize = () => {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+        updateFrustumBounds();
+        assignHeartTargets();
+      };
+      const resizeObserver = new ResizeObserver(handleResize);
+      resizeObserver.observe(container);
+
+      currentSceneCleanup = () => {
+        cancelAnimationFrame(animationFrameId);
+        resizeObserver.disconnect();
+        sphereGeometry.dispose();
+        for (const b of balls) {
+          b.material.dispose();
+        }
+        renderer.dispose();
+      };
+    };
+
+    buildGravityScene(currentBallColor);
+
+    /* ---------------------------------------------------------------------
+       5. STUDIO CONTROLS DRAWER UI & PALETTE REBUILD WIRING
+       --------------------------------------------------------------------- */
+    const openDrawerBtn = document.getElementById('open-drawer-btn');
+    const closeDrawerBtn = document.getElementById('close-drawer-btn');
+    const drawerScrim = document.getElementById('drawer-scrim');
+    const studioDrawer = document.getElementById('studio-drawer');
+    const paletteCardsContainer = document.getElementById('palette-cards-container');
+    const resetPaletteBtn = document.getElementById('reset-palette-btn');
+
+    const openDrawer = () => {
+      studioDrawer.classList.add('open');
+      drawerScrim.classList.add('open');
+    };
+    const closeDrawer = () => {
+      studioDrawer.classList.remove('open');
+      drawerScrim.classList.remove('open');
+    };
+
+    openDrawerBtn.addEventListener('click', openDrawer);
+    closeDrawerBtn.addEventListener('click', closeDrawer);
+    drawerScrim.addEventListener('click', closeDrawer);
+
+    const renderPaletteCards = () => {
+      paletteCardsContainer.innerHTML = '';
+      PALETTE_PRESETS.forEach((preset) => {
+        const isSelected = preset.id === selectedThemeId;
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = `w-full text-left rounded-xl border p-4 transition-all duration-200 ${
+          isSelected
+            ? 'bg-neutral-950 text-white border-neutral-950 scale-[1.02] shadow-lg'
+            : 'bg-white text-neutral-900 border-neutral-200 hover:border-neutral-400'
+        }`;
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-raleway font-bold text-[12px]">${preset.name}</span>
+            <span class="w-3 h-3 rounded-full border border-black/10" style="background-color: ${preset.primaryColor};"></span>
+          </div>
+          <p class="mt-1.5 font-raleway text-[10px] leading-relaxed ${isSelected ? 'text-neutral-300' : 'text-neutral-500'}">
+            ${preset.description}
+          </p>
+        `;
+
+        card.addEventListener('click', () => {
+          if (selectedThemeId === preset.id) return;
+          selectedThemeId = preset.id;
+          currentBallColor = preset.ballColor;
+          bgLayer0.style.background = preset.heroGradient;
+          renderPaletteCards();
+          buildGravityScene(currentBallColor);
+        });
+
+        paletteCardsContainer.appendChild(card);
+      });
+    };
+
+    resetPaletteBtn.addEventListener('click', () => {
+      const defaultPreset = PALETTE_PRESETS[0];
+      selectedThemeId = defaultPreset.id;
+      currentBallColor = defaultPreset.ballColor;
+      bgLayer0.style.background = defaultPreset.heroGradient;
+      renderPaletteCards();
+      buildGravityScene(currentBallColor);
+    });
+
+    renderPaletteCards();
+
+    /* ---------------------------------------------------------------------
+       6. INTERSECTION OBSERVER FOR REVEALS (SECTIONS 02–04 & FOOTER)
+       --------------------------------------------------------------------- */
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    document.querySelectorAll('.reveal, .footer-reveal').forEach((el) => {
+      revealObserver.observe(el);
+    });
+  </script>
+</body>
+</html>
