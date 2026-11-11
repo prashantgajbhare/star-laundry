@@ -439,6 +439,54 @@
       color: #d82b63;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.95), 0 1px 2px rgba(14, 42, 197, 0.25);
     }
+
+    /* ---------------------------------------------------------------------
+       3D HOLOGRAPHIC FOIL CARDS (REACT BITS HOLOCARD ENGINE)
+       --------------------------------------------------------------------- */
+    .holo-card {
+      --hc-radius: 22px;
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      perspective: 1100px;
+      border-radius: var(--hc-radius);
+      outline: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
+      cursor: pointer;
+    }
+    .holo-card__shadow {
+      position: absolute;
+      inset: 8% 6% -4%;
+      border-radius: var(--hc-radius);
+      background: radial-gradient(ellipse at center, rgba(14, 42, 197, 0.32) 0%, rgba(14, 42, 197, 0.08) 55%, transparent 75%);
+      filter: blur(22px);
+      pointer-events: none;
+      will-change: transform;
+      z-index: 0;
+    }
+    .holo-card__rotor {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--hc-radius);
+      transform-style: preserve-3d;
+      will-change: transform;
+      z-index: 1;
+    }
+    .holo-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      border-radius: inherit;
+      mix-blend-mode: color-dodge;
+      opacity: 0.95;
+      z-index: 2;
+    }
   </style>
 </head>
 <body class="relative min-h-screen text-[#1a1a1a]">
@@ -695,64 +743,99 @@
           </div>
         </div>
 
-        <!-- Four Glass Service Cards -->
-        <div class="reveal lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5 pointer-events-auto"
+        <!-- Four Glass Service Cards with 3D Holographic Foil Presets -->
+        <div class="reveal lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4 pointer-events-auto"
              style="transition-delay: 0.25s;">
 
-          <div class="rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/85 via-white/35 to-white/15 stat-card-ring transition-transform duration-300 hover:-translate-y-0.5">
-            <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
-              <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
-              <div class="flex items-center justify-between">
-                <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">01 · Daily Wear</span>
-                <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+          <!-- Card 01: Daily Wear (Holo Preset: cosmos) -->
+          <div class="holo-card card" data-holo-preset="cosmos" data-holo-index="3" role="region" aria-label="Daily Wear Laundry Services">
+            <span class="holo-card__shadow" aria-hidden="true"></span>
+            <div class="holo-card__rotor">
+              <div class="relative h-full rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/90 via-white/40 to-white/15 stat-card-ring overflow-hidden">
+                <div class="relative h-full rounded-[1.35rem] bg-white/45 backdrop-blur-xl px-5 py-5 overflow-hidden">
+                  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent z-10"></div>
+                  <canvas class="holo-canvas absolute inset-0 w-full h-full pointer-events-none rounded-[1.35rem]"></canvas>
+                  <div class="relative z-10 pointer-events-none">
+                    <div class="flex items-center justify-between">
+                      <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">01 · Daily Wear</span>
+                      <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+                    </div>
+                    <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Wash &amp; Fold / Wash &amp; Iron</div>
+                    <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
+                      Available both <strong>Per-Piece</strong> and <strong>Per-Kg</strong>. Shirts, trousers, t-shirts, jeans, kurtas, bedsheets &amp; pillow covers.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Wash &amp; Fold / Wash &amp; Iron</div>
-              <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
-                Available both <strong>Per-Piece</strong> and <strong>Per-Kg</strong>. Shirts, trousers, t-shirts, jeans, kurtas, bedsheets &amp; pillow covers.
-              </p>
             </div>
           </div>
 
-          <!-- Card 02: Professional Ironing & Starching (NO "STEAM") -->
-          <div class="rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/85 via-white/35 to-white/15 stat-card-ring transition-transform duration-300 hover:-translate-y-0.5">
-            <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
-              <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
-              <div class="flex items-center justify-between">
-                <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">02 · Crisp Press</span>
-                <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+          <!-- Card 02: Crisp Press (Holo Preset: bursts) -->
+          <div class="holo-card card" data-holo-preset="bursts" data-holo-index="0" role="region" aria-label="Professional Ironing & Starching">
+            <span class="holo-card__shadow" aria-hidden="true"></span>
+            <div class="holo-card__rotor">
+              <div class="relative h-full rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/90 via-white/40 to-white/15 stat-card-ring overflow-hidden">
+                <div class="relative h-full rounded-[1.35rem] bg-white/45 backdrop-blur-xl px-5 py-5 overflow-hidden">
+                  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent z-10"></div>
+                  <canvas class="holo-canvas absolute inset-0 w-full h-full pointer-events-none rounded-[1.35rem]"></canvas>
+                  <div class="relative z-10 pointer-events-none">
+                    <div class="flex items-center justify-between">
+                      <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">02 · Crisp Press</span>
+                      <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+                    </div>
+                    <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Professional Ironing &amp; Starching</div>
+                    <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
+                      Crisp normal ironing and starching services for regular and office wear.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Professional Ironing &amp; Starching</div>
-              <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
-                Crisp normal ironing and starching services for regular and office wear.
-              </p>
             </div>
           </div>
 
-          <div class="rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/85 via-white/35 to-white/15 stat-card-ring transition-transform duration-300 hover:-translate-y-0.5">
-            <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
-              <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
-              <div class="flex items-center justify-between">
-                <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">03 · Heavy &amp; Winter</span>
-                <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+          <!-- Card 03: Heavy & Winter (Holo Preset: shards) -->
+          <div class="holo-card card" data-holo-preset="shards" data-holo-index="2" role="region" aria-label="Heavy & Winter Laundry Care">
+            <span class="holo-card__shadow" aria-hidden="true"></span>
+            <div class="holo-card__rotor">
+              <div class="relative h-full rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/90 via-white/40 to-white/15 stat-card-ring overflow-hidden">
+                <div class="relative h-full rounded-[1.35rem] bg-white/45 backdrop-blur-xl px-5 py-5 overflow-hidden">
+                  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent z-10"></div>
+                  <canvas class="holo-canvas absolute inset-0 w-full h-full pointer-events-none rounded-[1.35rem]"></canvas>
+                  <div class="relative z-10 pointer-events-none">
+                    <div class="flex items-center justify-between">
+                      <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">03 · Heavy &amp; Winter</span>
+                      <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+                    </div>
+                    <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Blanket, Razai &amp; Curtains</div>
+                    <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
+                      Deep hygienic washing &amp; dry cleaning for heavy <strong>Blankets (कंबल), Razai / Quilts (रजाई)</strong>, comforters &amp; curtains.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Blanket, Razai &amp; Curtains</div>
-              <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
-                Deep hygienic washing &amp; dry cleaning for heavy <strong>Blankets (कंबल), Razai / Quilts (रजाई)</strong>, comforters &amp; curtains.
-              </p>
             </div>
           </div>
 
-          <div class="rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/85 via-white/35 to-white/15 stat-card-ring transition-transform duration-300 hover:-translate-y-0.5">
-            <div class="relative h-full rounded-[1.35rem] bg-white/35 backdrop-blur-xl px-5 py-5 overflow-hidden">
-              <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent"></div>
-              <div class="flex items-center justify-between">
-                <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">04 · Delicate Care</span>
-                <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+          <!-- Card 04: Delicate Care (Holo Preset: stars) -->
+          <div class="holo-card card" data-holo-preset="stars" data-holo-index="1" role="region" aria-label="Delicate Suit & Saree Dry Cleaning">
+            <span class="holo-card__shadow" aria-hidden="true"></span>
+            <div class="holo-card__rotor">
+              <div class="relative h-full rounded-[1.4rem] p-[1px] bg-gradient-to-b from-white/90 via-white/40 to-white/15 stat-card-ring overflow-hidden">
+                <div class="relative h-full rounded-[1.35rem] bg-white/45 backdrop-blur-xl px-5 py-5 overflow-hidden">
+                  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/95 to-transparent z-10"></div>
+                  <canvas class="holo-canvas absolute inset-0 w-full h-full pointer-events-none rounded-[1.35rem]"></canvas>
+                  <div class="relative z-10 pointer-events-none">
+                    <div class="flex items-center justify-between">
+                      <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-900 font-bold">04 · Delicate Care</span>
+                      <span class="w-2 h-2 rounded-full blue-dot-glow"></span>
+                    </div>
+                    <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Suit, Blazer &amp; Saree Dry Clean</div>
+                    <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
+                      Expert stain removal &amp; polishing for <strong>2/3-Piece Suits, Blazers, Sherwanis, Silk Sarees, Paithanis &amp; Lehengas</strong>.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="mt-2 font-raleway text-[18px] font-bold text-neutral-950">Suit, Blazer &amp; Saree Dry Clean</div>
-              <p class="mt-1 font-raleway text-[14.5px] leading-relaxed text-neutral-700">
-                Expert stain removal &amp; polishing for <strong>2/3-Piece Suits, Blazers, Sherwanis, Silk Sarees, Paithanis &amp; Lehengas</strong>.
-              </p>
             </div>
           </div>
 
@@ -1750,6 +1833,536 @@
     document.querySelectorAll('.reveal, .footer-reveal').forEach((el) => {
       revealObserver.observe(el);
     });
+
+    /* ---------------------------------------------------------------------
+       5. 3D HOLOGRAPHIC FOIL CARDS (REACT BITS HOLOCARD SHADER & SPRING ENGINE)
+       --------------------------------------------------------------------- */
+    const HOLO_PRESETS = ['bursts', 'stars', 'shards', 'cosmos', 'rainbow', 'swirl', 'glitter', 'gold'];
+    const HOLO_PERSPECTIVE = 1100;
+
+    const HOLO_VERTEX = `#version 300 es
+in vec2 position;
+void main() {
+  gl_Position = vec4(position, 0.0, 1.0);
+}`;
+
+    const HOLO_FRAGMENT = `#version 300 es
+precision highp float;
+uniform sampler2D uArt;
+uniform vec2 uSize;
+uniform float uAspect;
+uniform vec2 uTilt;
+uniform vec2 uLight;
+uniform float uDistance;
+uniform int uPreset;
+uniform float uIntensity;
+uniform float uScale;
+uniform float uEdge;
+uniform float uFrame;
+uniform float uRadius;
+uniform float uGlare;
+uniform vec3 uFoil;
+uniform float uReady;
+out vec4 outColor;
+
+const float TAU = 6.28318530718;
+
+struct Foil {
+  float mask;
+  float angle;
+  float jitter;
+  vec2 facet;
+};
+
+float hash(vec2 p) {
+  p = fract(p * vec2(234.34, 435.345));
+  p += dot(p, p + 34.23);
+  return fract(p.x * p.y);
+}
+
+vec2 hash2(vec2 p) {
+  return vec2(hash(p), hash(p + 17.31));
+}
+
+vec3 hue(float t) {
+  t = abs(fract(t * 0.5) * 2.0 - 1.0);
+  vec3 c = mix(vec3(0.1, 0.25, 1.0), vec3(0.0, 0.85, 1.0), smoothstep(0.0, 0.25, t));
+  c = mix(c, vec3(0.25, 1.0, 0.2), smoothstep(0.25, 0.45, t));
+  c = mix(c, vec3(1.0, 0.92, 0.05), smoothstep(0.45, 0.65, t));
+  c = mix(c, vec3(1.0, 0.45, 0.05), smoothstep(0.65, 0.85, t));
+  return mix(c, vec3(0.95, 0.12, 0.3), smoothstep(0.85, 1.0, t));
+}
+
+Foil bursts(vec2 p) {
+  vec2 q = mat2(0.7071068, 0.7071068, -0.7071068, 0.7071068) * (p - vec2(0.5, 0.5 * uAspect)) / (0.283 / uScale);
+  vec2 d = fract(q) - 0.5;
+  float u = length(d) / 0.49;
+  float angle = atan(d.y, d.x);
+  if (u < 0.12) {
+    float ring = min(floor(u / 0.045 + 0.5), 2.0);
+    float count = max(1.0, ring * 6.0);
+    float spot = (floor(angle / TAU * count) + 0.5) / count * TAU;
+    vec2 dot = vec2(cos(spot), sin(spot)) * ring * 0.045;
+    float m = smoothstep(0.024, 0.012, length(d / 0.49 - dot));
+    return Foil(m, angle, 0.5, vec2(0.0));
+  }
+  bool inner = u < 0.66;
+  float slot = angle / TAU * (inner ? 56.0 : 72.0);
+  bool shifted = mod(floor(slot), 2.0) > 0.5;
+  vec2 band = inner ? (shifted ? vec2(0.45, 0.61) : vec2(0.33, 0.49)) : (shifted ? vec2(0.84, 0.99) : vec2(0.7, 0.85));
+  float across = abs(u - (band.x + band.y) * 0.5) / ((band.y - band.x) * 0.5);
+  float along = abs(fract(slot) - 0.5) * 2.0;
+  float width = inner ? 0.72 : 0.6;
+  float m = smoothstep(1.0, 0.78, across) * smoothstep(width, width - 0.2, along);
+  return Foil(m, angle, 0.5, vec2(0.0));
+}
+
+Foil stars(vec2 p) {
+  Foil best = Foil(0.0, 0.0, 0.0, vec2(0.0));
+  vec2 g = p / (0.08 / uScale);
+  vec2 base = floor(g);
+  for (int j = -1; j <= 1; j++) {
+    for (int i = -1; i <= 1; i++) {
+      vec2 id = base + vec2(float(i), float(j));
+      float pick = hash(id + 1.3);
+      vec2 d = g - (id + 0.5 + (hash2(id) - 0.5) * 0.55);
+      float m = smoothstep(0.07, 0.035, length(d));
+      if (pick < 0.62) {
+        float size = mix(0.16, 0.5, pow(hash(id + 9.0), 1.8));
+        float sector = TAU / (pick < 0.3 ? 4.0 : 5.0);
+        float k = abs(fract((atan(d.y, d.x) + hash(id + 4.0) * TAU) / sector) - 0.5) * 2.0;
+        float edge = size * mix(1.0, 0.36, pow(k, 0.6));
+        m = smoothstep(edge, edge * 0.8, length(d));
+      }
+      if (m > best.mask) best = Foil(m, hash(id + 6.0) * TAU, hash(id + 8.0), (hash2(id + 2.0) - 0.5) * 0.6);
+    }
+  }
+  return best;
+}
+
+Foil shards(vec2 p) {
+  vec2 g = p * 19.0 * uScale;
+  vec2 base = floor(g);
+  float best = 9.0;
+  float second = 9.0;
+  vec2 id = base;
+  for (int j = -1; j <= 1; j++) {
+    for (int i = -1; i <= 1; i++) {
+      vec2 cell = base + vec2(float(i), float(j));
+      float d = length(cell + 0.08 + hash2(cell) * 0.84 - g);
+      if (d < best) {
+        second = best;
+        best = d;
+        id = cell;
+      } else if (d < second) {
+        second = d;
+      }
+    }
+  }
+  float crack = smoothstep(0.015, 0.07, second - best);
+  float shine = 0.25 + 0.75 * pow(hash(id + 7.7), 2.0);
+  return Foil((0.2 + 0.8 * crack) * shine, hash(id + 3.17) * TAU, hash(id + 11.73), (hash2(id + 5.0) - 0.5) * 0.5);
+}
+
+Foil cosmos(vec2 p) {
+  Foil best = Foil(0.0, 0.0, 0.0, vec2(0.0));
+  vec2 g = p / (0.16 / uScale);
+  vec2 base = floor(g);
+  for (int j = -1; j <= 1; j++) {
+    for (int i = -1; i <= 1; i++) {
+      vec2 id = base + vec2(float(i), float(j));
+      vec2 d = g - (id + 0.5 + (hash2(id) - 0.5) * 0.7);
+      float size = mix(0.16, 0.52, hash(id + 2.0));
+      float r = length(d);
+      float m = max(smoothstep(0.05, 0.0, abs(r - size)), smoothstep(size, size - 0.04, r) * 0.22);
+      if (m > best.mask) best = Foil(m, hash(id + 6.0) * TAU + atan(d.y, d.x) * 0.5, hash(id + 1.0), (hash2(id + 4.0) - 0.5) * 0.5);
+    }
+  }
+  vec2 fine = p / (0.035 / uScale);
+  vec2 cell = floor(fine);
+  float dots = smoothstep(0.2, 0.1, length(fine - cell - 0.5 - (hash2(cell + 9.0) - 0.5) * 0.6)) * step(0.55, hash(cell + 2.0));
+  if (dots > best.mask) best = Foil(dots, hash(cell) * TAU, hash(cell + 3.0), (hash2(cell + 7.0) - 0.5) * 0.6);
+  return best;
+}
+
+Foil rainbow(vec2 p) {
+  return Foil(0.86 + 0.14 * hash(floor(p * 700.0 * uScale)), 0.2, 0.5, vec2(0.0));
+}
+
+Foil swirl(vec2 p) {
+  vec2 d = p - vec2(0.5, 0.42 * uAspect);
+  float angle = atan(d.y, d.x);
+  float rays = 0.55 + 0.45 * smoothstep(0.3, 0.7, abs(fract(angle / TAU * 60.0 * uScale) - 0.5) * 2.0);
+  return Foil(rays, angle, length(d), vec2(0.0));
+}
+
+Foil glitter(vec2 p) {
+  vec2 g = p * 72.0 * uScale;
+  vec2 cell = floor(g);
+  float size = mix(0.18, 0.4, hash(cell + 3.0));
+  float m = smoothstep(size, size * 0.55, length(fract(g) - 0.5 - (hash2(cell) - 0.5) * 0.5)) * step(0.25, hash(cell + 5.0));
+  return Foil(m, hash(cell + 7.0) * TAU, hash(cell + 9.0), (hash2(cell + 11.0) - 0.5) * 0.9);
+}
+
+Foil gold(vec2 p) {
+  Foil flake = glitter(p * 0.8);
+  if (flake.mask > 0.5) return flake;
+  float etch = 0.55 + 0.45 * smoothstep(0.2, 0.8, abs(fract((p.x * 0.6 + p.y) * 140.0 * uScale) - 0.5) * 2.0);
+  return Foil(etch, 0.9, 0.4, vec2(0.0));
+}
+
+vec3 sparkles(vec2 p, vec3 halfway, vec2 sweep, float awake) {
+  vec2 g = p * 62.0;
+  vec2 cell = floor(g);
+  vec2 d = fract(g) - 0.5 - (hash2(cell) - 0.5) * 0.36;
+  float spin = hash(cell + 3.0) * TAU;
+  d = mat2(cos(spin), -sin(spin), sin(spin), cos(spin)) * d;
+  vec2 a = abs(d);
+  float hexagon = max(a.x * 0.866 + a.y * 0.5, a.y);
+  float size = mix(0.22, 0.38, hash(cell + 2.0));
+  float piece = smoothstep(size, size - 0.07, hexagon) * step(0.42, hash(cell + 4.0));
+  vec3 facet = normalize(vec3((hash2(cell + 6.0) - 0.5) * 0.9, 1.0));
+  float flash = pow(max(dot(facet, halfway), 0.0), 6.0);
+  vec3 tint = hue(dot(sweep, vec2(cos(spin), sin(spin))) * 1.2 + dot(sweep, vec2(0.8, 0.6)) * 0.8 + hash(cell + 8.0) * 0.5);
+  vec3 color = piece * tint * (0.3 + 1.6 * flash) * awake;
+  vec2 fine = p * 210.0;
+  vec2 speckCell = floor(fine);
+  float speck = smoothstep(0.24, 0.0, length(fract(fine) - 0.5 - (hash2(speckCell) - 0.5) * 0.5)) * step(0.72, hash(speckCell + 1.0));
+  float speckFlash = pow(max(dot(normalize(vec3((hash2(speckCell + 2.0) - 0.5) * 0.9, 1.0)), halfway), 0.0), 10.0);
+  return color + vec3(1.2) * speck * speckFlash * (1.0 - piece);
+}
+
+void main() {
+  vec2 uv = vec2(gl_FragCoord.x / uSize.x, 1.0 - gl_FragCoord.y / uSize.y);
+  vec2 p = vec2(uv.x, uv.y * uAspect);
+  vec2 center = vec2(0.5, 0.5 * uAspect);
+  vec2 q = abs(p - center) - center + uRadius;
+  float outside = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - uRadius;
+  float pixel = 1.0 / uSize.x;
+  float alpha = clamp(0.5 - outside / pixel, 0.0, 1.0);
+  vec4 sampled = texture(uArt, uv);
+  if (uReady > 0.5) alpha *= sampled.a;
+  if (alpha <= 0.0) {
+    outColor = vec4(0.0);
+    return;
+  }
+  vec3 art = uReady > 0.5 ? pow(sampled.rgb, vec3(2.2)) : vec3(0.0);
+  mat3 rx = mat3(1.0, 0.0, 0.0, 0.0, cos(uTilt.x), sin(uTilt.x), 0.0, -sin(uTilt.x), cos(uTilt.x));
+  mat3 ry = mat3(cos(uTilt.y), 0.0, -sin(uTilt.y), 0.0, 1.0, 0.0, sin(uTilt.y), 0.0, cos(uTilt.y));
+  mat3 turn = rx * ry;
+  vec3 world = turn * vec3(p - center, 0.0);
+  vec3 view = normalize(transpose(turn) * (vec3(0.0, 0.0, uDistance) - world));
+  vec3 lamp = vec3((uLight - 0.5) * vec2(1.1, 1.1 * uAspect), 0.9);
+  vec3 light = normalize(transpose(turn) * (lamp - world));
+  vec3 halfway = normalize(light + view);
+  vec2 sweep = light.xy + view.xy;
+  float sheen = pow(max(halfway.z, 0.0), 10.0);
+  float shine = pow(max(halfway.z, 0.0), 80.0);
+  float frame = 1.0 - smoothstep(uFrame - pixel, uFrame + pixel, -outside);
+  Foil f;
+  if (uPreset == 0) f = bursts(p);
+  else if (uPreset == 1) f = stars(p);
+  else if (uPreset == 2) f = shards(p);
+  else if (uPreset == 3) f = cosmos(p);
+  else if (uPreset == 4) f = rainbow(p);
+  else if (uPreset == 5) f = swirl(p);
+  else if (uPreset == 6) f = glitter(p);
+  else f = gold(p);
+  vec3 metal = uPreset == 7 ? vec3(1.0, 0.74, 0.38) * dot(uFoil, vec3(0.3333)) * 1.15 : uFoil;
+  vec4 look = uPreset == 0 ? vec4(0.25, 1.9, 0.12, 1.0)
+    : uPreset == 1 ? vec4(0.6, 1.4, 0.3, 1.0)
+    : uPreset == 2 ? vec4(0.9, 0.9, 0.6, 0.5)
+    : uPreset == 3 ? vec4(0.7, 1.2, 0.35, 0.85)
+    : uPreset == 4 ? vec4(0.0, 2.2, 0.0, 0.45)
+    : uPreset == 5 ? vec4(1.6, 0.3, 0.0, 0.4)
+    : uPreset == 6 ? vec4(0.9, 1.0, 0.6, 1.0)
+    : vec4(0.3, 1.0, 0.2, 0.95);
+  vec2 dir = vec2(cos(f.angle), sin(f.angle));
+  float phase = dot(sweep, dir) * look.x + dot(sweep, vec2(0.8, 0.6)) * look.y + f.jitter * look.z;
+  float spoke = 1.0;
+  if (uPreset == 5) {
+    float facing = dot(normalize(sweep + 0.0001), dir);
+    phase = f.jitter * 2.4 + facing * 0.6 + length(sweep) * 0.8;
+    spoke = 0.3 + 0.7 * smoothstep(0.25, 0.95, abs(facing));
+  }
+  vec3 tint = hue(phase);
+  if (uPreset == 7) tint = mix(tint, metal, 0.65);
+  float glint = pow(max(dot(normalize(vec3(f.facet, 1.0)), halfway), 0.0), 24.0) * step(0.001, length(f.facet));
+  bool layered = uPreset == 2 || uPreset == 4 || uPreset == 5 || uPreset == 7;
+  vec3 foil = (layered ? tint : mix(tint, vec3(1.0), 0.12)) * (1.15 + 0.3 * sheen) + metal * glint * 1.2;
+  float tilted = smoothstep(0.02, 0.21, length(sin(uTilt)));
+  float awake = mix(0.2, 1.0, tilted);
+  float strength = uIntensity * f.mask * (1.0 - frame) * awake;
+  float band = uPreset == 5 ? spoke : layered ? 0.25 + 0.75 * smoothstep(0.3, 0.95, 0.5 + 0.5 * cos(phase * TAU * 0.5 + 1.3)) : 1.0;
+  vec3 color = layered
+    ? 1.0 - (1.0 - art) * (1.0 - clamp(foil * look.w * band * strength, 0.0, 1.0))
+    : mix(art, foil, clamp(strength * look.w, 0.0, 1.0));
+  color += sparkles(p, halfway, sweep, mix(0.55, 1.0, tilted)) * uEdge * frame;
+  color += uFoil * sheen * 0.12 * frame;
+  color += vec3(sheen * 0.07 + shine * 0.3) * uGlare;
+  color = pow(clamp(color, 0.0, 1.0), vec3(1.0 / 2.2));
+  float foilAlpha = clamp(max(color.r, max(color.g, color.b)) * 1.4, 0.0, 1.0) * alpha;
+  outColor = vec4(color * alpha, foilAlpha);
+}`;
+
+    const compileHoloShader = (gl, type, source) => {
+      const shader = gl.createShader(type);
+      if (!shader) return null;
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (gl.getShaderParameter(shader, gl.COMPILE_STATUS)) return shader;
+      console.warn('HoloShader compile error:', gl.getShaderInfoLog(shader));
+      gl.deleteShader(shader);
+      return null;
+    };
+
+    const holoSpring = (value, velocity, target, stiffness, damping, dt) => {
+      const next = velocity + ((target - value) * stiffness - velocity * damping) * dt;
+      return [value + next * dt, next];
+    };
+
+    const initHoloCard = (cardEl, options) => {
+      const rotor = cardEl.querySelector('.holo-card__rotor');
+      const shadow = cardEl.querySelector('.holo-card__shadow');
+      const canvas = cardEl.querySelector('.holo-canvas');
+      if (!rotor || !canvas) return null;
+
+      const gl = canvas.getContext('webgl2', { alpha: true, premultipliedAlpha: true, antialias: false });
+      let program = null;
+      let buffer = null;
+      let texture = null;
+      const uniforms = {};
+
+      if (gl) {
+        const vs = compileHoloShader(gl, gl.VERTEX_SHADER, HOLO_VERTEX);
+        const fs = compileHoloShader(gl, gl.FRAGMENT_SHADER, HOLO_FRAGMENT);
+        if (vs && fs) {
+          program = gl.createProgram();
+          gl.attachShader(program, vs);
+          gl.attachShader(program, fs);
+          gl.bindAttribLocation(program, 0, 'position');
+          gl.linkProgram(program);
+          gl.deleteShader(vs);
+          gl.deleteShader(fs);
+          if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            console.warn('HoloProgram link error:', gl.getProgramInfoLog(program));
+            gl.deleteProgram(program);
+            program = null;
+          }
+        }
+
+        if (program) {
+          buffer = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+          gl.enableVertexAttribArray(0);
+          gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+          texture = gl.createTexture();
+          gl.bindTexture(gl.TEXTURE_2D, texture);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0]));
+
+          for (const name of [
+            'uArt', 'uSize', 'uAspect', 'uTilt', 'uLight', 'uDistance',
+            'uPreset', 'uIntensity', 'uScale', 'uEdge', 'uFrame',
+            'uRadius', 'uGlare', 'uFoil', 'uReady'
+          ]) {
+            uniforms[name] = gl.getUniformLocation(program, name);
+          }
+        }
+      }
+
+      const card = {
+        el: cardEl,
+        rotor,
+        shadow,
+        canvas,
+        gl,
+        program,
+        buffer,
+        texture,
+        uniforms,
+        presetIndex: options.presetIndex ?? 0,
+        intensity: options.intensity ?? 0.55,
+        scale: options.scale ?? 1.0,
+        edgeSparkle: options.edgeSparkle ?? 0.85,
+        frame: options.frame ?? 0.045,
+        glare: options.glare ?? 0.55,
+        radius: options.radius ?? 22,
+        foil: options.foil ?? [0.764, 0.798, 0.844],
+        tiltMax: options.tiltMax ?? 14,
+        hoverScale: options.hoverScale ?? 1.04,
+        idle: options.idle !== false,
+        tiltX: 0,
+        tiltY: 0,
+        tiltVX: 0,
+        tiltVY: 0,
+        lightX: 0.36,
+        lightY: 0.26,
+        lightVX: 0,
+        lightVY: 0,
+        lift: 1,
+        liftV: 0,
+        clock: options.initialClock ?? (Math.random() * 20),
+        pointerInside: false,
+        pointerX: 0.5,
+        pointerY: 0.5
+      };
+
+      const resize = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = Math.max(1, Math.round(canvas.clientWidth * dpr));
+        const h = Math.max(1, Math.round(canvas.clientHeight * dpr));
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w;
+          canvas.height = h;
+        }
+      };
+      const ro = new ResizeObserver(resize);
+      ro.observe(canvas);
+      window.addEventListener('resize', resize);
+      resize();
+
+      const updatePointer = (e) => {
+        const rect = cardEl.getBoundingClientRect();
+        card.pointerX = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+        card.pointerY = Math.min(1, Math.max(0, (e.clientY - rect.top) / rect.height));
+      };
+
+      cardEl.addEventListener('pointerenter', (e) => {
+        card.pointerInside = true;
+        updatePointer(e);
+      });
+      cardEl.addEventListener('pointermove', (e) => {
+        if (e.pointerType === 'touch' && !e.buttons) return;
+        card.pointerInside = true;
+        updatePointer(e);
+      });
+      cardEl.addEventListener('pointerleave', () => {
+        card.pointerInside = false;
+      });
+      cardEl.addEventListener('pointercancel', () => {
+        card.pointerInside = false;
+      });
+
+      card.draw = () => {
+        if (!gl || !program) return;
+        const w = canvas.width;
+        const h = canvas.height;
+        if (!w || !h) return;
+
+        gl.viewport(0, 0, w, h);
+        gl.clearColor(0, 0, 0, 0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.useProgram(program);
+
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.uniform1i(uniforms.uArt, 0);
+        gl.uniform2f(uniforms.uSize, w, h);
+        gl.uniform1f(uniforms.uAspect, h / w);
+        gl.uniform2f(uniforms.uTilt, (card.tiltX * Math.PI) / 180, (card.tiltY * Math.PI) / 180);
+        gl.uniform2f(uniforms.uLight, card.lightX, card.lightY);
+        gl.uniform1f(uniforms.uDistance, HOLO_PERSPECTIVE / Math.max(1, canvas.clientWidth));
+        gl.uniform1i(uniforms.uPreset, card.presetIndex);
+        gl.uniform1f(uniforms.uIntensity, card.intensity);
+        gl.uniform1f(uniforms.uScale, card.scale);
+        gl.uniform1f(uniforms.uEdge, card.edgeSparkle);
+        gl.uniform1f(uniforms.uFrame, card.frame);
+        gl.uniform1f(uniforms.uRadius, card.radius / Math.max(1, canvas.clientWidth));
+        gl.uniform1f(uniforms.uGlare, card.glare);
+        gl.uniform3f(uniforms.uFoil, card.foil[0], card.foil[1], card.foil[2]);
+        gl.uniform1f(uniforms.uReady, 0.0);
+
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      };
+
+      return card;
+    };
+
+    const holoCards = [];
+    const holoCardElements = document.querySelectorAll('.holo-card');
+    const holoPresetConfigs = [
+      { presetIndex: 3, initialClock: 0.0 }, // 01 Cosmos
+      { presetIndex: 0, initialClock: 1.8 }, // 02 Bursts
+      { presetIndex: 2, initialClock: 3.6 }, // 03 Shards
+      { presetIndex: 1, initialClock: 5.4 }  // 04 Stars
+    ];
+
+    holoCardElements.forEach((el, idx) => {
+      const cfg = holoPresetConfigs[idx] || { presetIndex: idx % 4, initialClock: idx * 1.5 };
+      const card = initHoloCard(el, {
+        presetIndex: cfg.presetIndex,
+        intensity: 0.55,
+        edgeSparkle: 0.85,
+        frame: 0.045,
+        glare: 0.55,
+        radius: 22,
+        scale: 1.0,
+        foil: [0.764, 0.798, 0.844],
+        tiltMax: 14,
+        hoverScale: 1.04,
+        idle: true,
+        initialClock: cfg.initialClock
+      });
+      if (card) holoCards.push(card);
+    });
+
+    let lastHoloTime = performance.now();
+    const tickHoloEngine = (now) => {
+      const dt = Math.min(1 / 30, Math.max(1 / 240, (now - lastHoloTime) / 1000));
+      lastHoloTime = now;
+
+      for (let i = 0; i < holoCards.length; i++) {
+        const c = holoCards[i];
+        let targetX = 0;
+        let targetY = 0;
+        let lightX = 0.36;
+        let lightY = 0.26;
+        let lift = 1;
+
+        const drifting = c.idle && !c.pointerInside;
+
+        if (c.pointerInside) {
+          targetX = (0.5 - c.pointerY) * 2 * c.tiltMax;
+          targetY = (c.pointerX - 0.5) * 2 * c.tiltMax;
+          lightX = c.pointerX;
+          lightY = c.pointerY;
+          lift = c.hoverScale;
+        } else if (drifting) {
+          c.clock += dt;
+          const t = c.clock;
+          targetX = Math.sin(t * 0.7) * c.tiltMax * 0.28;
+          targetY = Math.sin(t * 0.53 + 1.2) * c.tiltMax * 0.4;
+          lightX = 0.5 + Math.sin(t * 0.41) * 0.42;
+          lightY = 0.38 + Math.sin(t * 0.33 + 0.6) * 0.3;
+        }
+
+        const steps = Math.ceil(dt / (1 / 240));
+        const h = dt / steps;
+        for (let s = 0; s < steps; s++) {
+          [c.tiltX, c.tiltVX] = holoSpring(c.tiltX, c.tiltVX, targetX, 150, 16, h);
+          [c.tiltY, c.tiltVY] = holoSpring(c.tiltY, c.tiltVY, targetY, 150, 16, h);
+          [c.lightX, c.lightVX] = holoSpring(c.lightX, c.lightVX, lightX, 220, 30, h);
+          [c.lightY, c.lightVY] = holoSpring(c.lightY, c.lightVY, lightY, 220, 30, h);
+          [c.lift, c.liftV] = holoSpring(c.lift, c.liftV, lift, 320, 30, h);
+        }
+
+        c.rotor.style.transform = `perspective(${HOLO_PERSPECTIVE}px) scale(${c.lift.toFixed(4)}) rotateX(${c.tiltX.toFixed(2)}deg) rotateY(${c.tiltY.toFixed(2)}deg)`;
+        if (c.shadow) {
+          c.shadow.style.transform = `translate(${(-c.tiltY * 0.7).toFixed(2)}px, ${(c.tiltX * 0.7).toFixed(2)}px) scale(${(0.9 + (c.lift - 1) * 1.5).toFixed(3)})`;
+        }
+
+        c.draw();
+      }
+
+      requestAnimationFrame(tickHoloEngine);
+    };
+    requestAnimationFrame(tickHoloEngine);
   </script>
 </body>
 </html>
